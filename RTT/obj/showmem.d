@@ -1,0 +1,9 @@
+..\obj\showmem.o: ..\..\RT-Thread\libcpu\arm\common\showmem.c
+..\obj\showmem.o: ..\..\RT-Thread\include\rtthread.h
+..\obj\showmem.o: ..\..\RT-Thread\include\rtdef.h
+..\obj\showmem.o: ..\apps\rtconfig.h
+..\obj\showmem.o: D:\Keil\ARM\RV31\INC\stdarg.h
+..\obj\showmem.o: ..\..\RT-Thread\include\rtdebug.h
+..\obj\showmem.o: ..\..\RT-Thread\include\rtservice.h
+..\obj\showmem.o: ..\..\RT-Thread\include\rtm.h
+..\obj\showmem.o: ..\..\RT-Thread\include\rtthread.h

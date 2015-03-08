@@ -1,0 +1,10 @@
+..\obj\module.o: ..\..\RT-Thread\src\module.c
+..\obj\module.o: ..\..\RT-Thread\include\rthw.h
+..\obj\module.o: ..\..\RT-Thread\include\rtthread.h
+..\obj\module.o: ..\..\RT-Thread\include\rtdef.h
+..\obj\module.o: ..\apps\rtconfig.h
+..\obj\module.o: D:\Keil\ARM\RV31\INC\stdarg.h
+..\obj\module.o: ..\..\RT-Thread\include\rtdebug.h
+..\obj\module.o: ..\..\RT-Thread\include\rtservice.h
+..\obj\module.o: ..\..\RT-Thread\include\rtm.h
+..\obj\module.o: ..\..\RT-Thread\include\rtthread.h

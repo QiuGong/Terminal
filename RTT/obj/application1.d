@@ -1,0 +1,11 @@
+..\obj\application1.o: ..\apps\aim900-2\application1.c
+..\obj\application1.o: ..\..\RT-Thread\include\rtthread.h
+..\obj\application1.o: ..\..\RT-Thread\include\rtdef.h
+..\obj\application1.o: ..\apps\StartUp\rtconfig.h
+..\obj\application1.o: D:\Keil\ARM\RV31\INC\stdarg.h
+..\obj\application1.o: ..\..\RT-Thread\include\rtdebug.h
+..\obj\application1.o: ..\..\RT-Thread\include\rtservice.h
+..\obj\application1.o: ..\..\RT-Thread\include\rtm.h
+..\obj\application1.o: ..\..\RT-Thread\include\rtthread.h
+..\obj\application1.o: D:\Keil\ARM\RV31\INC\stdio.h
+..\obj\application1.o: ..\apps\aim900-2\cellular.h
