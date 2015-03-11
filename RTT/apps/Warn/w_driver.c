@@ -11,6 +11,20 @@
 #define WARN_LED_GPIO                   	GPIOA
 #define WARN_LED_PIN                  	 	(GPIO_Pin_8)
 
+static struct rt_timer time_warn_led;
+
+static void w_led_callBack(void *parameter)
+{	
+	if(GPIO_ReadInputDataBit(WARN_LED_GPIO, WARN_LED_PIN))
+	{
+		GPIO_ResetBits(WARN_LED_GPIO, WARN_LED_PIN);// ON
+	}
+	else
+	{
+		GPIO_SetBits(WARN_LED_GPIO, WARN_LED_PIN);// OFF
+	}	
+}
+
 static void warn_led_init(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
@@ -22,26 +36,35 @@ static void warn_led_init(void)
 
     GPIO_InitStructure.GPIO_Pin   = WARN_LED_PIN;
     GPIO_Init(WARN_LED_GPIO, &GPIO_InitStructure);
+
+	// 初始化定时器
+	RT_DEBUG_LOG(DEBUG_WARN, ("init time warn_led.\n"));
+	rt_timer_init(&time_warn_led, "w_led", w_led_callBack, RT_NULL, 30, RT_TIMER_FLAG_SOFT_TIMER | RT_TIMER_FLAG_PERIODIC); 
 }
 
 
 void warn_led_off(void)
 {
-	GPIO_SetBits(WARN_LED_GPIO, WARN_LED_PIN);
+	rt_timer_stop(&time_warn_led);
 	RT_DEBUG_LOG(DEBUG_WARN, ("warn led off.\n"));
+	GPIO_SetBits(WARN_LED_GPIO, WARN_LED_PIN);// OFF
 }
 
 
 void warn_led_on(void)
 {
-	GPIO_ResetBits(WARN_LED_GPIO, WARN_LED_PIN);
+	rt_timer_start(&time_warn_led);
 	RT_DEBUG_LOG(DEBUG_WARN, ("warn led on.\n"));
+	GPIO_ResetBits(WARN_LED_GPIO, WARN_LED_PIN);// ON
 }
 
 
 rt_uint8_t warn_led_status(void)
 {
-	return GPIO_ReadInputDataBit(WARN_LED_GPIO, WARN_LED_PIN);
+	if (time_warn_led.parent.flag & RT_TIMER_FLAG_ACTIVATED)
+		return WARN_LED_ON;
+	else
+		return WARN_LED_OFF;
 }
 
 

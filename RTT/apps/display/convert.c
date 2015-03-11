@@ -73,9 +73,9 @@ void get_query_sensor_value(rt_uint8_t which)
 	{	
 		if((++i) == which)
 		{
-			x04_dsp_request(formula_temp_16(p->item.sensor2_ch2_min), formula_temp_16(p->item.sensor2_ch2_max), 
-					 		formula_ph_16(p->item.sensor2_ch1_min), formula_ph_16(p->item.sensor2_ch1_max), 
-					 		formula_do_16(p->item.sensor1_ch2_min), formula_do_16(p->item.sensor1_ch2_max), 
+			x04_dsp_request((formula_temp_16(p->item.sensor2_ch2_min)/10), 	(formula_temp_16(p->item.sensor2_ch2_max)/10), 
+					 		(formula_ph_16(p->item.sensor2_ch1_min)/10),	(formula_ph_16(p->item.sensor2_ch1_max)/10), 
+					 		(formula_do_16(p->item.sensor1_ch2_min)/10), 	(formula_do_16(p->item.sensor1_ch2_max)/10), 
 					 		0);		
 		}
 
@@ -111,6 +111,8 @@ void set_query_sensor_value(rt_uint8_t *b)
 		}
 		p = p->next;
 	}
+
+	refresh_sensor_to_flash();
 #else
 
 	// 返回界面
@@ -213,6 +215,8 @@ void set_time_value(rt_uint8_t *b)
 		}
 		p = p->next;
 	}
+
+	refresh_sensor_to_flash();
 #else
 
 	// 返回界面

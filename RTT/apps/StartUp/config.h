@@ -9,7 +9,7 @@
 // œ‘ æ∆¡÷∏¡Ó
 #define  DISPLAY_EN			1 
 // SIM900
-#define  SIM900_EN			1   
+#define  SIM900_EN			0   
 
 
 //  RS1302  ±÷”

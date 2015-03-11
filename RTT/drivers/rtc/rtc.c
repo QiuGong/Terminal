@@ -65,7 +65,7 @@ static void per_get_time(void* parameter)
 static struct rt_timer get_time_timer;
 static void init_per_get_time(void)
 {
-	rt_timer_init(&get_time_timer, "timer1", /* 定时器名字是 timer1 */
+	rt_timer_init(&get_time_timer, "rtc", /* 定时器名字是 timer1 */
 				  per_get_time, 	   	/* 超时时回调的处理函数 */
 				  RT_NULL, 			 	/* 超时函数的入口参数 */
 				  100, 				 	/* 定时长度，以OS Tick为单位，即100个OS Tick */

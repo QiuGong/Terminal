@@ -9,7 +9,7 @@ rt_uint16_t formula_temp_16(rt_uint16_t source)
 
 rt_uint16_t formula_temp_8(rt_uint8_t source)
 {
-	return source / TEMP_K;
+	return (source * 10) / TEMP_K;
 }
  
   
@@ -64,15 +64,15 @@ FINSH_FUNCTION_EXPORT(get_formula_ph, e.g: get_formula_ph())
  *
  * ¼ÆËã¹«Ê½£ºY=KX
  */
-static rt_uint16_t 	DO_K = 233;
+static rt_uint16_t 	DO_K = 284;
 rt_uint16_t formula_do_16(rt_uint16_t source)
 {	
-	return source * (DO_K/1000.0);	  
+	return (source * (DO_K/1000.0)) + 0.5;	  
 }
 
 rt_uint16_t formula_do_8(rt_uint8_t source)
 {
-	return source / (DO_K/1000.0);
+	return (source * 10) / (DO_K/1000.0);
 }
 
 
