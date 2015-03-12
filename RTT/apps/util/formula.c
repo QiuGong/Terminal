@@ -64,7 +64,7 @@ FINSH_FUNCTION_EXPORT(get_formula_ph, e.g: get_formula_ph())
  *
  * ¼ÆËã¹«Ê½£ºY=KX
  */
-static rt_uint16_t 	DO_K = 284;
+static rt_uint16_t 	DO_K = 248;
 rt_uint16_t formula_do_16(rt_uint16_t source)
 {	
 	return (source * (DO_K/1000.0)) + 0.5;	  

@@ -347,7 +347,7 @@ void list_sensor()
 		RT_DEBUG_LOG(DEBUG_RS485, ("t4-> start:%04X, end:%04X, set:%08X.\n", p->item.time4_start, p->item.time4_end, p->item.time4_set));		
 		RT_DEBUG_LOG(DEBUG_RS485, ("-------------------------------------------\n"));
 		RT_DEBUG_LOG(DEBUG_RS485, ("K:%04X \n", p->item.k));
-		RT_DEBUG_LOG(DEBUG_RS485, ("k1:%08X, k2:%08X, k3:%08X, k4:%08X.\n", p->item.k1_relate, p->item.k2_relate, p->item.k3_relate, p->item.k4_relate));
+		RT_DEBUG_LOG(DEBUG_RS485, ("k1:%04X, k2:%04X, k3:%04X, k4:%04X.\n", p->item.k1_relate, p->item.k2_relate, p->item.k3_relate, p->item.k4_relate));
 		RT_DEBUG_LOG(DEBUG_RS485, ("||||||||||||||||||||||||||||||||||||||||||||\n\n\n\n"));
 
 		p = p->next;
@@ -474,12 +474,13 @@ void sensor_time(rt_uint8_t id, rt_uint8_t ch, rt_uint16_t start, rt_uint16_t en
 				p->item.time4_end = hex16_to_bcd16(end);
 				p->item.time4_set = set;
 			}	
-			refresh_sensor_to_flash();
 			return;
 		}
 
 		p = p->next;
 	}
+
+	refresh_sensor_to_flash();
 }
 FINSH_FUNCTION_EXPORT(sensor_time, e.g: sensor_time(1,1,820,1530,255))
 

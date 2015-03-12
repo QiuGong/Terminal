@@ -81,15 +81,15 @@ void display_rec_thread_entry(void* parameter)
 }
 
 
-void display_send(rt_uint8_t *b, rt_uint8_t len)
+void display_send(rt_uint8_t *buf, rt_uint8_t len)
 {					
 	rt_uint8_t i; 
 	 
     for(i = 0; i < len; i++)
     {
-		USART_SendData(USART3, b[i]);
+		USART_SendData(USART3, buf[i]);
 		while (USART_GetFlagStatus(USART3, USART_FLAG_TXE) == RESET); 
-    }				
+    }
 }
 
 

@@ -212,11 +212,11 @@ void set_time_value(rt_uint8_t *b)
 				p->item.time4_start = (hex8_to_bcd8(b[2]) << 8) | hex8_to_bcd8(b[3]);
 				p->item.time4_end   = (hex8_to_bcd8(b[4]) << 8) | hex8_to_bcd8(b[5]);
 			}
+
+			refresh_sensor_to_flash();
 		}
 		p = p->next;
 	}
-
-	refresh_sensor_to_flash();
 #else
 
 	// ∑µªÿΩÁ√Ê
