@@ -73,7 +73,7 @@ void get_query_sensor_value(rt_uint8_t which)
 	{	
 		if((++i) == which)
 		{
-			x04_dsp_request((formula_temp_16(p->item.sensor2_ch2_min)/10), 	(formula_temp_16(p->item.sensor2_ch2_max)/10), 
+			x04_dsp_request (formula_temp_16(p->item.sensor2_ch2_min), 		formula_temp_16(p->item.sensor2_ch2_max), 
 					 		(formula_ph_16(p->item.sensor2_ch1_min)/10),	(formula_ph_16(p->item.sensor2_ch1_max)/10), 
 					 		(formula_do_16(p->item.sensor1_ch2_min)/10), 	(formula_do_16(p->item.sensor1_ch2_max)/10), 
 					 		0);		
@@ -169,6 +169,54 @@ void get_time_value(rt_uint8_t which)
 			x07_dsp_request(0x04, bcd8_to_hex8(p->item.time4_start>>8), bcd8_to_hex8(p->item.time4_start), 
 								  bcd8_to_hex8(p->item.time4_end>>8), bcd8_to_hex8(p->item.time4_end));				
 			rt_thread_delay(30);
+
+			x07_dsp_request(0x05, bcd8_to_hex8(p->item.time5_start>>8), bcd8_to_hex8(p->item.time5_start), 
+								  bcd8_to_hex8(p->item.time5_end>>8), bcd8_to_hex8(p->item.time5_end));				
+			rt_thread_delay(30);
+
+			x07_dsp_request(0x06, bcd8_to_hex8(p->item.time6_start>>8), bcd8_to_hex8(p->item.time6_start), 
+								  bcd8_to_hex8(p->item.time6_end>>8), bcd8_to_hex8(p->item.time6_end));				
+			rt_thread_delay(30);
+
+			x07_dsp_request(0x07, bcd8_to_hex8(p->item.time7_start>>8), bcd8_to_hex8(p->item.time7_start), 
+								  bcd8_to_hex8(p->item.time7_end>>8), bcd8_to_hex8(p->item.time7_end));				
+			rt_thread_delay(30);
+
+ 			x07_dsp_request(0x08, bcd8_to_hex8(p->item.time8_start>>8), bcd8_to_hex8(p->item.time8_start), 
+								  bcd8_to_hex8(p->item.time8_end>>8), bcd8_to_hex8(p->item.time8_end));				
+			rt_thread_delay(30);
+
+			x07_dsp_request(0x09, bcd8_to_hex8(p->item.time9_start>>8), bcd8_to_hex8(p->item.time9_start), 
+								  bcd8_to_hex8(p->item.time9_end>>8), bcd8_to_hex8(p->item.time9_end));				
+			rt_thread_delay(30);
+
+			x07_dsp_request(0x10, bcd8_to_hex8(p->item.time10_start>>8), bcd8_to_hex8(p->item.time10_start), 
+								  bcd8_to_hex8(p->item.time10_end>>8), bcd8_to_hex8(p->item.time10_end));				
+			rt_thread_delay(30);
+
+			x07_dsp_request(0x11, bcd8_to_hex8(p->item.time11_start>>8), bcd8_to_hex8(p->item.time11_start), 
+								  bcd8_to_hex8(p->item.time11_end>>8), bcd8_to_hex8(p->item.time11_end));				
+			rt_thread_delay(30);
+
+			x07_dsp_request(0x12, bcd8_to_hex8(p->item.time12_start>>8), bcd8_to_hex8(p->item.time12_start), 
+								  bcd8_to_hex8(p->item.time12_end>>8), bcd8_to_hex8(p->item.time12_end));				
+			rt_thread_delay(30);
+
+			x07_dsp_request(0x13, bcd8_to_hex8(p->item.time13_start>>8), bcd8_to_hex8(p->item.time13_start), 
+								  bcd8_to_hex8(p->item.time13_end>>8), bcd8_to_hex8(p->item.time13_end));				
+			rt_thread_delay(30);
+
+			x07_dsp_request(0x14, bcd8_to_hex8(p->item.time14_start>>8), bcd8_to_hex8(p->item.time14_start), 
+								  bcd8_to_hex8(p->item.time14_end>>8), bcd8_to_hex8(p->item.time14_end));				
+			rt_thread_delay(30);
+
+ 			x07_dsp_request(0x15, bcd8_to_hex8(p->item.time15_start>>8), bcd8_to_hex8(p->item.time15_start), 
+								  bcd8_to_hex8(p->item.time15_end>>8), bcd8_to_hex8(p->item.time15_end));				
+			rt_thread_delay(30);
+
+			x07_dsp_request(0x16, bcd8_to_hex8(p->item.time16_start>>8), bcd8_to_hex8(p->item.time16_start), 
+								  bcd8_to_hex8(p->item.time16_end>>8), bcd8_to_hex8(p->item.time16_end));				
+			rt_thread_delay(30);
 		}
 
 		p = p->next;
@@ -212,6 +260,66 @@ void set_time_value(rt_uint8_t *b)
 				p->item.time4_start = (hex8_to_bcd8(b[2]) << 8) | hex8_to_bcd8(b[3]);
 				p->item.time4_end   = (hex8_to_bcd8(b[4]) << 8) | hex8_to_bcd8(b[5]);
 			}
+			else if(b[1] == 5)
+			{
+				p->item.time5_start = (hex8_to_bcd8(b[2]) << 8) | hex8_to_bcd8(b[3]);
+				p->item.time5_end   = (hex8_to_bcd8(b[4]) << 8) | hex8_to_bcd8(b[5]);
+			}
+			else if(b[1] == 6)
+			{
+				p->item.time6_start = (hex8_to_bcd8(b[2]) << 8) | hex8_to_bcd8(b[3]);
+				p->item.time6_end   = (hex8_to_bcd8(b[4]) << 8) | hex8_to_bcd8(b[5]);
+			}
+			else if(b[1] == 7)
+			{
+				p->item.time7_start = (hex8_to_bcd8(b[2]) << 8) | hex8_to_bcd8(b[3]);
+				p->item.time7_end   = (hex8_to_bcd8(b[4]) << 8) | hex8_to_bcd8(b[5]);
+			}
+			else if(b[1] == 8)
+			{
+				p->item.time8_start = (hex8_to_bcd8(b[2]) << 8) | hex8_to_bcd8(b[3]);
+				p->item.time8_end   = (hex8_to_bcd8(b[4]) << 8) | hex8_to_bcd8(b[5]);
+			}
+			else if(b[1] == 9)
+			{
+				p->item.time9_start = (hex8_to_bcd8(b[2]) << 8) | hex8_to_bcd8(b[3]);
+				p->item.time9_end   = (hex8_to_bcd8(b[4]) << 8) | hex8_to_bcd8(b[5]);
+			}
+			else if(b[1] == 10)
+			{
+				p->item.time10_start = (hex8_to_bcd8(b[2]) << 8) | hex8_to_bcd8(b[3]);
+				p->item.time10_end   = (hex8_to_bcd8(b[4]) << 8) | hex8_to_bcd8(b[5]);
+			}
+			else if(b[1] == 11)
+			{
+				p->item.time11_start = (hex8_to_bcd8(b[2]) << 8) | hex8_to_bcd8(b[3]);
+				p->item.time11_end   = (hex8_to_bcd8(b[4]) << 8) | hex8_to_bcd8(b[5]);
+			}
+			else if(b[1] == 12)
+			{
+				p->item.time12_start = (hex8_to_bcd8(b[2]) << 8) | hex8_to_bcd8(b[3]);
+				p->item.time12_end   = (hex8_to_bcd8(b[4]) << 8) | hex8_to_bcd8(b[5]);
+			}
+			else if(b[1] == 13)
+			{
+				p->item.time13_start = (hex8_to_bcd8(b[2]) << 8) | hex8_to_bcd8(b[3]);
+				p->item.time13_end   = (hex8_to_bcd8(b[4]) << 8) | hex8_to_bcd8(b[5]);
+			}
+			else if(b[1] == 14)
+			{
+				p->item.time14_start = (hex8_to_bcd8(b[2]) << 8) | hex8_to_bcd8(b[3]);
+				p->item.time14_end   = (hex8_to_bcd8(b[4]) << 8) | hex8_to_bcd8(b[5]);
+			}
+			else if(b[1] == 15)
+			{
+				p->item.time15_start = (hex8_to_bcd8(b[2]) << 8) | hex8_to_bcd8(b[3]);
+				p->item.time15_end   = (hex8_to_bcd8(b[4]) << 8) | hex8_to_bcd8(b[5]);
+			}
+			else if(b[1] == 16)
+			{
+				p->item.time16_start = (hex8_to_bcd8(b[2]) << 8) | hex8_to_bcd8(b[3]);
+				p->item.time16_end   = (hex8_to_bcd8(b[4]) << 8) | hex8_to_bcd8(b[5]);
+			}			
 
 			refresh_sensor_to_flash();
 		}

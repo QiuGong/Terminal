@@ -4,6 +4,7 @@
 
 #if ( WARN_EN > 0 )
 
+// 标记采集器：阈值，定时。
 static void judge_sensor_set(Position p, rt_uint32_t value, enum X01_DEV dev, rt_uint8_t which)
 {
 	// 当前设备位是否标志
@@ -37,6 +38,82 @@ static void judge_sensor_set(Position p, rt_uint32_t value, enum X01_DEV dev, rt
 			}			
 		}	
 	}		
+}
+
+
+static rt_uint16_t	control_value_set;
+static rt_uint16_t	control_timer_set;
+static rt_uint16_t	control_relate_set;
+static rt_uint16_t	control_time_out_set;
+static rt_uint16_t	control_power_drop_set;
+static void judge_control_set(rt_uint32_t value, enum WARN_CONTROL dev, rt_uint8_t which)
+{
+	// 当前设备位是否标志
+	if(value & (0x00000001 << (dev - 1 + 8)))
+	{		
+		// 当前开关位是否标志
+		if(value & (0x00000001 << (dev - 1 + 8 + 16)))
+		{
+			if(which == WHICH_WARN_VALUE)
+			{
+				control_value_set |=  (value & (0x00000001 << (dev - 1 + 8)));
+			}
+			else if(which == WHICH_WARN_TIMER)
+			{
+				control_timer_set |=  (value & (0x00000001 << (dev - 1 + 8)));
+			}
+			else if(which == WHICH_WARN_RELATE)
+			{
+				control_relate_set |=  (value & (0x00000001 << (dev - 1 + 8)));
+			}
+			else if(which == WHICH_WARN_TIME_OUT)
+			{
+				control_time_out_set |=  (value & (0x00000001 << (dev - 1 + 8)));
+			}
+			else if(which == WHICH_WARN_POWER_DROP)
+			{
+				control_power_drop_set |=  (value & (0x00000001 << (dev - 1 + 8)));
+			}
+		}
+		else if((value & (0x00000001 << (dev - 1 + 8 + 16))) == OFF)
+		{
+			if(which == WHICH_WARN_VALUE)
+			{
+				control_value_set &= ~(value & (0x00000001 << (dev - 1 + 8)));
+			}
+			else if(which == WHICH_WARN_TIMER)
+			{
+				control_timer_set &= ~(value & (0x00000001 << (dev - 1 + 8)));
+			}
+			else if(which == WHICH_WARN_RELATE)
+			{
+				control_relate_set &= ~(value & (0x00000001 << (dev - 1 + 8)));
+			}
+			else if(which == WHICH_WARN_TIME_OUT)
+			{
+				control_time_out_set &= ~(value & (0x00000001 << (dev - 1 + 8)));
+			}
+			else if(which == WHICH_WARN_POWER_DROP)
+			{
+				control_power_drop_set &= ~(value & (0x00000001 << (dev - 1 + 8)));
+			}			
+		}	
+	}		
+}
+
+
+void warn_judge_set(Position p, rt_uint32_t value, rt_uint8_t which)
+{
+	judge_sensor_set(p, value, LED, which);
+	judge_sensor_set(p, value, CH1, which);
+	judge_sensor_set(p, value, T2,  which);
+	judge_sensor_set(p, value, T3,  which);
+	judge_sensor_set(p, value, M_A, which);
+	judge_sensor_set(p, value, M_B, which);
+	judge_sensor_set(p, value, M_C, which);
+
+	judge_control_set(value, WARN_CONTROL_LED, which);
+	judge_control_set(value, WARN_CONTROL_BELL, which);	
 }
 
 
@@ -258,67 +335,6 @@ static void sensor_set(Position p)
 }
 
 
-static rt_uint16_t	control_value_set;
-static rt_uint16_t	control_timer_set;
-static rt_uint16_t	control_relate_set;
-static rt_uint16_t	control_time_out_set;
-static rt_uint16_t	control_power_drop_set;
-static void judge_control_set(rt_uint32_t value, enum WARN_CONTROL dev, rt_uint8_t which)
-{
-	// 当前设备位是否标志
-	if(value & (0x00000001 << (dev - 1 + 8)))
-	{		
-		// 当前开关位是否标志
-		if(value & (0x00000001 << (dev - 1 + 8 + 16)))
-		{
-			if(which == WHICH_WARN_VALUE)
-			{
-				control_value_set |=  (value & (0x00000001 << (dev - 1 + 8)));
-			}
-			else if(which == WHICH_WARN_TIMER)
-			{
-				control_timer_set |=  (value & (0x00000001 << (dev - 1 + 8)));
-			}
-			else if(which == WHICH_WARN_RELATE)
-			{
-				control_relate_set |=  (value & (0x00000001 << (dev - 1 + 8)));
-			}
-			else if(which == WHICH_WARN_TIME_OUT)
-			{
-				control_time_out_set |=  (value & (0x00000001 << (dev - 1 + 8)));
-			}
-			else if(which == WHICH_WARN_POWER_DROP)
-			{
-				control_power_drop_set |=  (value & (0x00000001 << (dev - 1 + 8)));
-			}
-		}
-		else if((value & (0x00000001 << (dev - 1 + 8 + 16))) == OFF)
-		{
-			if(which == WHICH_WARN_VALUE)
-			{
-				control_value_set &= ~(value & (0x00000001 << (dev - 1 + 8)));
-			}
-			else if(which == WHICH_WARN_TIMER)
-			{
-				control_timer_set &= ~(value & (0x00000001 << (dev - 1 + 8)));
-			}
-			else if(which == WHICH_WARN_RELATE)
-			{
-				control_relate_set &= ~(value & (0x00000001 << (dev - 1 + 8)));
-			}
-			else if(which == WHICH_WARN_TIME_OUT)
-			{
-				control_time_out_set &= ~(value & (0x00000001 << (dev - 1 + 8)));
-			}
-			else if(which == WHICH_WARN_POWER_DROP)
-			{
-				control_power_drop_set &= ~(value & (0x00000001 << (dev - 1 + 8)));
-			}			
-		}	
-	}		
-}
-
-
 static void control_set(void)
 {
 	// WARN_CONTROL_LED
@@ -375,21 +391,6 @@ static void control_set(void)
 	control_relate_set = 0;
 	control_time_out_set = 0;
 	control_power_drop_set = 0;
-}
-
-
-void warn_judge_set(Position p, rt_uint32_t value, rt_uint8_t which)
-{
-	judge_sensor_set(p, value, LED, which);
-	judge_sensor_set(p, value, CH1, which);
-	judge_sensor_set(p, value, T2,  which);
-	judge_sensor_set(p, value, T3,  which);
-	judge_sensor_set(p, value, M_A, which);
-	judge_sensor_set(p, value, M_B, which);
-	judge_sensor_set(p, value, M_C, which);
-
-	judge_control_set(value, WARN_CONTROL_LED, which);
-	judge_control_set(value, WARN_CONTROL_BELL, which);	
 }
 
 

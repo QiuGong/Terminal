@@ -49,11 +49,11 @@ enum X01_DEV{ LED = 0x01, CH1 = 0x02, T2 = 0x03, T3 = 0x04, M_A = 0x05, M_B = 0x
 enum X01_CONTROL{ ON = 0x01, OFF = 0x00};
 
 // 判断组数,每组长度
-#define TIME_JUDGE_NUM			0x04 * 2
+#define TIME_JUDGE_NUM			0x10 * 2
 #define TIME_PER_LEN			0x02
 
 // 定时控制值，定时控制值长度
-#define TIME_SET_VALUE_NUM		0x04
+#define TIME_SET_VALUE_NUM		0x10
 #define TIME_SET_PER_LEN		0x04
 
 
@@ -211,6 +211,54 @@ typedef struct ELEMENT
 	rt_uint16_t time4_start;
 	rt_uint16_t time4_end;
 	rt_uint32_t time4_set;
+
+	rt_uint16_t time5_start;
+	rt_uint16_t time5_end;
+	rt_uint32_t time5_set;
+
+	rt_uint16_t time6_start;
+	rt_uint16_t time6_end;
+	rt_uint32_t time6_set;
+
+	rt_uint16_t time7_start;
+	rt_uint16_t time7_end;
+	rt_uint32_t time7_set;
+
+	rt_uint16_t time8_start;
+	rt_uint16_t time8_end;
+	rt_uint32_t time8_set;
+
+	rt_uint16_t time9_start;
+	rt_uint16_t time9_end;
+	rt_uint32_t time9_set;
+
+	rt_uint16_t time10_start;
+	rt_uint16_t time10_end;
+	rt_uint32_t time10_set;
+
+	rt_uint16_t time11_start;
+	rt_uint16_t time11_end;
+	rt_uint32_t time11_set;
+
+	rt_uint16_t time12_start;
+	rt_uint16_t time12_end;
+	rt_uint32_t time12_set;
+
+	rt_uint16_t time13_start;
+	rt_uint16_t time13_end;
+	rt_uint32_t time13_set;
+
+	rt_uint16_t time14_start;
+	rt_uint16_t time14_end;
+	rt_uint32_t time14_set;
+
+	rt_uint16_t time15_start;
+	rt_uint16_t time15_end;
+	rt_uint32_t time15_set;
+
+	rt_uint16_t time16_start;
+	rt_uint16_t time16_end;
+	rt_uint32_t time16_set;
 
 
 	// 设置关联检测

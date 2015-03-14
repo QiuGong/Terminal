@@ -1,7 +1,7 @@
 #include "util.h"
 
 
-static double TEMP_K = 0.625;
+static double TEMP_K = 0.0625;
 rt_uint16_t formula_temp_16(rt_uint16_t source)
 {
 	return source * TEMP_K ;
@@ -9,7 +9,7 @@ rt_uint16_t formula_temp_16(rt_uint16_t source)
 
 rt_uint16_t formula_temp_8(rt_uint8_t source)
 {
-	return (source * 10) / TEMP_K;
+	return source / TEMP_K;
 }
  
   

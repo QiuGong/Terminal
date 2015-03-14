@@ -133,6 +133,54 @@ void refresh_sensor_to_flash(void)
 		len += negative((rt_uint8_t *)&(p->item.time4_end), 	  buf+len, TIME_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.time4_set), 	  buf+len, TIME_SET_PER_LEN);
 
+		len += negative((rt_uint8_t *)&(p->item.time5_start), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time5_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time5_set), 	  buf+len, TIME_SET_PER_LEN);
+
+		len += negative((rt_uint8_t *)&(p->item.time6_start), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time6_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time6_set), 	  buf+len, TIME_SET_PER_LEN);
+
+		len += negative((rt_uint8_t *)&(p->item.time7_start), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time7_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time7_set), 	  buf+len, TIME_SET_PER_LEN);
+
+		len += negative((rt_uint8_t *)&(p->item.time8_start), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time8_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time8_set), 	  buf+len, TIME_SET_PER_LEN);
+
+		len += negative((rt_uint8_t *)&(p->item.time9_start), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time9_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time9_set), 	  buf+len, TIME_SET_PER_LEN);
+
+		len += negative((rt_uint8_t *)&(p->item.time10_start), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time10_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time10_set), 	  buf+len, TIME_SET_PER_LEN);
+
+		len += negative((rt_uint8_t *)&(p->item.time11_start), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time11_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time11_set), 	  buf+len, TIME_SET_PER_LEN);
+
+		len += negative((rt_uint8_t *)&(p->item.time12_start), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time12_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time12_set), 	  buf+len, TIME_SET_PER_LEN);
+
+		len += negative((rt_uint8_t *)&(p->item.time13_start), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time13_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time13_set), 	  buf+len, TIME_SET_PER_LEN);
+
+		len += negative((rt_uint8_t *)&(p->item.time14_start), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time14_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time14_set), 	  buf+len, TIME_SET_PER_LEN);
+
+		len += negative((rt_uint8_t *)&(p->item.time15_start), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time15_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time15_set), 	  buf+len, TIME_SET_PER_LEN);
+
+		len += negative((rt_uint8_t *)&(p->item.time16_start), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time16_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time16_set), 	  buf+len, TIME_SET_PER_LEN);
+
 		len += negative((rt_uint8_t *)&(p->item.k1_relate), 	  buf+len, K_RELATE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.k2_relate), 	  buf+len, K_RELATE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.k3_relate), 	  buf+len, K_RELATE_PER_LEN);
@@ -215,6 +263,54 @@ void read_sensor_from_flash(void)
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time4_start), 	TIME_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time4_end), 	TIME_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time4_set), 	TIME_SET_PER_LEN);
+	
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time5_start), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time5_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time5_set), 	TIME_SET_PER_LEN);
+	
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time6_start), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time6_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time6_set), 	TIME_SET_PER_LEN);
+	
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time7_start), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time7_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time7_set), 	TIME_SET_PER_LEN);
+	
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time8_start), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time8_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time8_set), 	TIME_SET_PER_LEN);
+	
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time9_start), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time9_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time9_set), 	TIME_SET_PER_LEN);
+	
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time10_start), TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time10_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time10_set), 	TIME_SET_PER_LEN);
+	
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time11_start), TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time11_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time11_set), 	TIME_SET_PER_LEN);
+	
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time12_start), TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time12_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time12_set), 	TIME_SET_PER_LEN);
+	
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time13_start), TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time13_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time13_set), 	TIME_SET_PER_LEN);
+	
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time14_start), TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time14_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time14_set), 	TIME_SET_PER_LEN);
+	
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time15_start), TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time15_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time15_set), 	TIME_SET_PER_LEN);
+	
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time16_start), TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time16_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time16_set), 	TIME_SET_PER_LEN);
 
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.k1_relate), 	K_RELATE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.k2_relate), 	K_RELATE_PER_LEN);
@@ -341,10 +437,22 @@ void list_sensor()
 		RT_DEBUG_LOG(DEBUG_RS485, ("s2_c1-> val:%d, min:%d, max:%d, set:%08X, 酸碱:%d, 最小:%d, 最大:%d \n", p->item.sensor2_ch1, p->item.sensor2_ch1_min, p->item.sensor2_ch1_max, p->item.sensor2_ch1_set, formula_ph_16(p->item.sensor2_ch1), 	formula_ph_16(p->item.sensor2_ch1_min), 	formula_ph_16(p->item.sensor2_ch1_max)));
 		RT_DEBUG_LOG(DEBUG_RS485, ("s2_c2-> val:%d, min:%d, max:%d, set:%08X, 温度:%d, 最小:%d, 最大:%d \n", p->item.sensor2_ch2, p->item.sensor2_ch2_min, p->item.sensor2_ch2_max, p->item.sensor2_ch2_set, formula_temp_16(p->item.sensor2_ch2), 	formula_temp_16(p->item.sensor2_ch2_min), 	formula_temp_16(p->item.sensor2_ch2_max)));	
 		RT_DEBUG_LOG(DEBUG_RS485, ("-------------------------------------------\n"));
-		RT_DEBUG_LOG(DEBUG_RS485, ("t1-> start:%04X, end:%04X, set:%08X.\n", p->item.time1_start, p->item.time1_end, p->item.time1_set));
-		RT_DEBUG_LOG(DEBUG_RS485, ("t2-> start:%04X, end:%04X, set:%08X.\n", p->item.time2_start, p->item.time2_end, p->item.time2_set));
-		RT_DEBUG_LOG(DEBUG_RS485, ("t3-> start:%04X, end:%04X, set:%08X.\n", p->item.time3_start, p->item.time3_end, p->item.time3_set));
-		RT_DEBUG_LOG(DEBUG_RS485, ("t4-> start:%04X, end:%04X, set:%08X.\n", p->item.time4_start, p->item.time4_end, p->item.time4_set));		
+		RT_DEBUG_LOG(DEBUG_RS485, ("t1-> start:%04X,  end:%04X, set:%08X.\n", p->item.time1_start,  p->item.time1_end,  p->item.time1_set));
+		RT_DEBUG_LOG(DEBUG_RS485, ("t2-> start:%04X,  end:%04X, set:%08X.\n", p->item.time2_start,  p->item.time2_end,  p->item.time2_set));
+		RT_DEBUG_LOG(DEBUG_RS485, ("t3-> start:%04X,  end:%04X, set:%08X.\n", p->item.time3_start,  p->item.time3_end,  p->item.time3_set));
+		RT_DEBUG_LOG(DEBUG_RS485, ("t4-> start:%04X,  end:%04X, set:%08X.\n", p->item.time4_start,  p->item.time4_end,  p->item.time4_set));		
+		RT_DEBUG_LOG(DEBUG_RS485, ("t5-> start:%04X,  end:%04X, set:%08X.\n", p->item.time5_start,  p->item.time5_end,  p->item.time5_set));
+		RT_DEBUG_LOG(DEBUG_RS485, ("t6-> start:%04X,  end:%04X, set:%08X.\n", p->item.time6_start,  p->item.time6_end,  p->item.time6_set));
+		RT_DEBUG_LOG(DEBUG_RS485, ("t7-> start:%04X,  end:%04X, set:%08X.\n", p->item.time7_start,  p->item.time7_end,  p->item.time7_set));
+		RT_DEBUG_LOG(DEBUG_RS485, ("t8-> start:%04X,  end:%04X, set:%08X.\n", p->item.time8_start,  p->item.time8_end,  p->item.time8_set));
+		RT_DEBUG_LOG(DEBUG_RS485, ("t9-> start:%04X,  end:%04X, set:%08X.\n", p->item.time9_start,  p->item.time9_end,  p->item.time9_set));
+		RT_DEBUG_LOG(DEBUG_RS485, ("t10-> start:%04X, end:%04X, set:%08X.\n", p->item.time10_start, p->item.time10_end, p->item.time10_set));
+		RT_DEBUG_LOG(DEBUG_RS485, ("t11-> start:%04X, end:%04X, set:%08X.\n", p->item.time11_start, p->item.time11_end, p->item.time11_set));
+		RT_DEBUG_LOG(DEBUG_RS485, ("t12-> start:%04X, end:%04X, set:%08X.\n", p->item.time12_start, p->item.time12_end, p->item.time12_set));		
+		RT_DEBUG_LOG(DEBUG_RS485, ("t13-> start:%04X, end:%04X, set:%08X.\n", p->item.time13_start, p->item.time13_end, p->item.time13_set));
+		RT_DEBUG_LOG(DEBUG_RS485, ("t14-> start:%04X, end:%04X, set:%08X.\n", p->item.time14_start, p->item.time14_end, p->item.time14_set));
+		RT_DEBUG_LOG(DEBUG_RS485, ("t15-> start:%04X, end:%04X, set:%08X.\n", p->item.time15_start, p->item.time15_end, p->item.time15_set));
+		RT_DEBUG_LOG(DEBUG_RS485, ("t16-> start:%04X, end:%04X, set:%08X.\n", p->item.time16_start, p->item.time16_end, p->item.time16_set));		
 		RT_DEBUG_LOG(DEBUG_RS485, ("-------------------------------------------\n"));
 		RT_DEBUG_LOG(DEBUG_RS485, ("K:%04X \n", p->item.k));
 		RT_DEBUG_LOG(DEBUG_RS485, ("k1:%04X, k2:%04X, k3:%04X, k4:%04X.\n", p->item.k1_relate, p->item.k2_relate, p->item.k3_relate, p->item.k4_relate));
@@ -395,6 +503,23 @@ void del_sensor(rt_uint8_t id)
 	}	
 }
 FINSH_FUNCTION_EXPORT(del_sensor, e.g: del_sensor(1))
+
+
+void plus_sensor(rt_uint8_t b1,rt_uint8_t b2,rt_uint8_t b3,rt_uint8_t b4,rt_uint8_t b5,rt_uint8_t b6,
+				rt_uint8_t b7,rt_uint8_t b8,rt_uint8_t b9,rt_uint8_t b10,rt_uint8_t b11,rt_uint8_t b12)
+{	
+	rt_uint8_t buf[ID_LEN];
+
+	buf[0] = b1; buf[1] = b2; 	buf[2] = b3; 	buf[3] = b4;
+	buf[4] = b5; buf[5] = b6; 	buf[6] = b7; 	buf[7] = b8;
+	buf[8] = b9; buf[9] = b10; 	buf[10] = b11; 	buf[11] = b12;	
+
+	if(add_sensor(buf) == RT_TRUE)
+	{
+		refresh_sensor_to_flash();	
+	}	
+}
+FINSH_FUNCTION_EXPORT(plus_sensor, e.g: plus_sensor(121,0,6,0,34,0,0,0,0,0,52,48))
 
 
 void sensor_set(rt_uint8_t id, rt_uint8_t ch, rt_uint16_t min, rt_uint16_t max, rt_uint16_t set)
@@ -473,7 +598,80 @@ void sensor_time(rt_uint8_t id, rt_uint8_t ch, rt_uint16_t start, rt_uint16_t en
 				p->item.time4_start = hex16_to_bcd16(start);
 				p->item.time4_end = hex16_to_bcd16(end);
 				p->item.time4_set = set;
-			}	
+			}
+			else if(ch == 5)
+			{
+				p->item.time5_start = hex16_to_bcd16(start);
+				p->item.time5_end = hex16_to_bcd16(end);
+				p->item.time5_set = set;
+			}			
+			else if(ch == 6)
+			{
+				p->item.time6_start = hex16_to_bcd16(start);
+				p->item.time6_end = hex16_to_bcd16(end);
+				p->item.time6_set = set;
+			}			
+			else if(ch == 7)
+			{
+				p->item.time7_start = hex16_to_bcd16(start);
+				p->item.time7_end = hex16_to_bcd16(end);
+				p->item.time7_set = set;
+			}			
+			else if(ch == 8)
+			{
+				p->item.time8_start = hex16_to_bcd16(start);
+				p->item.time8_end = hex16_to_bcd16(end);
+				p->item.time8_set = set;
+			}
+			else if(ch == 9)
+			{
+				p->item.time9_start = hex16_to_bcd16(start);
+				p->item.time9_end = hex16_to_bcd16(end);
+				p->item.time9_set = set;
+			}			
+			else if(ch == 10)
+			{
+				p->item.time10_start = hex16_to_bcd16(start);
+				p->item.time10_end = hex16_to_bcd16(end);
+				p->item.time10_set = set;
+			}			
+			else if(ch == 11)
+			{
+				p->item.time11_start = hex16_to_bcd16(start);
+				p->item.time11_end = hex16_to_bcd16(end);
+				p->item.time11_set = set;
+			}			
+			else if(ch == 12)
+			{
+				p->item.time12_start = hex16_to_bcd16(start);
+				p->item.time12_end = hex16_to_bcd16(end);
+				p->item.time12_set = set;
+			}			
+			else if(ch == 13)
+			{
+				p->item.time13_start = hex16_to_bcd16(start);
+				p->item.time13_end = hex16_to_bcd16(end);
+				p->item.time13_set = set;
+			}
+			else if(ch == 14)
+			{
+				p->item.time14_start = hex16_to_bcd16(start);
+				p->item.time14_end = hex16_to_bcd16(end);
+				p->item.time14_set = set;
+			}
+			else if(ch == 15)
+			{
+				p->item.time15_start = hex16_to_bcd16(start);
+				p->item.time15_end = hex16_to_bcd16(end);
+				p->item.time15_set = set;
+			}			
+			else if(ch == 16)
+			{
+				p->item.time16_start = hex16_to_bcd16(start);
+				p->item.time16_end = hex16_to_bcd16(end);
+				p->item.time16_set = set;
+			}						
+										
 			return;
 		}
 
