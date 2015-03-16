@@ -1,15 +1,12 @@
 #include <display.h>
-#include "rtc.h"
 
 
 #if ( DISPLAY_EN > 0 )
 
 void x01_dsp_respond(rt_uint8_t *b)
 {	
-#if ( DS1302_EN > 0 )
 	rt_uint16_t year = (b[0]<<8) | b[1];
-	set_rtc(year - 2000, b[2], b[3], b[4], b[5], b[6]);	
-#endif			
+	set_UTC8_time(year - 2000, b[2], b[3], b[4], b[5], b[6]);				
 }
 
 void x02_dsp_respond(rt_uint8_t *b)

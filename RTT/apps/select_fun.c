@@ -3,9 +3,15 @@
 #include "strLib.h"
 
 
-SelectFun fun;
+static SelectFun fun;
 
-void refresh_select_fun_to_flash(void)
+SelectFun get_select_fun(void)
+{
+	return fun;
+}
+
+
+static void refresh_select_fun_to_flash(void)
 {
 	rt_uint8_t len = 0;
 	rt_uint8_t *buf = RT_NULL;
@@ -74,7 +80,7 @@ void read_select_fun_from_flash(void)
 
 #ifdef RT_USING_FINSH
 #include <finsh.h>
-void list_define(void)
+static void list_define(void)
 {
 	RT_DEBUG_LOG(RS485_EN, 		("RS485_EN \n"));
 	RT_DEBUG_LOG(DISPLAY_EN, 	("DISPLAY_EN \n"));
@@ -93,7 +99,7 @@ void list_define(void)
 FINSH_FUNCTION_EXPORT(list_define, e.g: list_define())
 
 
-void list_select_fun(void)
+static void list_select_fun(void)
 {
 	RT_DEBUG_LOG(RS485_EN, ("warn value:"));
 	if(fun.warn_value == 1)
@@ -149,7 +155,7 @@ void list_select_fun(void)
 FINSH_FUNCTION_EXPORT(list_select_fun, e.g: list_select_fun())
 
 
-void select_fun(rt_uint8_t select, rt_uint8_t status)
+static void select_fun(rt_uint8_t select, rt_uint8_t status)
 {
 	if(select == 1)
 	{

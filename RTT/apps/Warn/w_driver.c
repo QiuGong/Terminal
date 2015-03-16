@@ -25,6 +25,7 @@ static void w_led_callBack(void *parameter)
 	}	
 }
 
+
 static void warn_led_init(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
@@ -70,7 +71,7 @@ rt_uint8_t warn_led_status(void)
 
 #ifdef RT_USING_FINSH
 #include <finsh.h>
-void warn_led(rt_uint32_t value)
+static void warn_led(rt_uint32_t value)
 {
     /* set led status */
     switch (value)
@@ -96,6 +97,7 @@ FINSH_FUNCTION_EXPORT(warn_led, e.g: warn_led(0) warn_led(1))
 #define WARN_BELL_RCC                    	RCC_APB2Periph_GPIOC
 #define WARN_BELL_GPIO                   	GPIOC
 #define WARN_BELL_PIN                  	 	(GPIO_Pin_9)
+
 
 static void warn_bell_init(void)
 {
@@ -152,10 +154,12 @@ void warn_bell_on(void)
 	RT_DEBUG_LOG(DEBUG_WARN, ("warn bell on.\n"));
 }
 
+
 rt_uint8_t warn_bell_status(void)
 {
 	return bell_status;
 }
+
 
 void warn_bell_isr(void)
 {

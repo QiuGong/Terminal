@@ -1,15 +1,66 @@
 #include <display.h>
 #include "rs485.h"
-#include "util.h"
+#include "rtc.h"
+#include "formula.h"
 #include "strLib.h"
 
 
 #if ( DISPLAY_EN > 0 )
 
+/**
+ * 显示屏接收线程
+ *
+ * @param 
+ *
+ * @return 
+ */
+void display_rec_thread_entry(void* parameter)
+{
+	_display_rec_thread_entry(parameter);
+}
+
+
+/**
+ * 获取北京时间
+ *
+ * @param buf:6个字节，年月日时分秒。（备注：年-2000）
+ *
+ * @return 
+ */
+void get_UTC8_time(rt_uint8_t *buf)
+{
+#if ( DS1302_EN > 0 )
+	get_time(buf);
+#endif
+}
+
+
+/**
+ * 设置北京时间
+ *
+ * @param year,mon,day,hour,min,sec（备注：年-2000）
+ *
+ * @return 
+ */
+void set_UTC8_time(rt_uint8_t year, rt_uint8_t mon, rt_uint8_t day, rt_uint8_t hour, rt_uint8_t min, rt_uint8_t sec)
+{
+#if ( DS1302_EN > 0 )
+	set_rtc(year, mon, day, hour, min, sec);	
+#endif
+}
+
+
+/**
+ * 获取传感器显示值（温度，酸碱，溶氧）
+ *
+ * @param 
+ *
+ * @return 
+ */
 void get_sensor_value(void)
 {
 #if ( RS485_EN > 0 )
-	Position p = sensor;
+	Position p = get_sensor_list();
 	rt_uint8_t i = 0;
 
 	while(p != RT_NULL)
@@ -40,10 +91,17 @@ void get_sensor_value(void)
 }
 
 
+/**
+ * 获取传感器组数
+ *
+ * @param 
+ *
+ * @return 
+ */
 void get_query_sensor_cnt(void)
 {
 #if ( RS485_EN > 0 )
-	Position p = sensor;
+	Position p = get_sensor_list();
 	rt_uint8_t cnt = 0;
 
 	while(p != RT_NULL)
@@ -62,11 +120,18 @@ void get_query_sensor_cnt(void)
 }
 
 
-// 关联未做？？？？？？
+/**
+ * 获取传感器设置值 （温度，酸碱，溶氧）
+ *
+ * @param which:哪一组
+ *
+ * @return 
+ */
 void get_query_sensor_value(rt_uint8_t which)
 {
+// 关联未做？？？？？？
 #if ( RS485_EN > 0 )
-	Position p = sensor;
+	Position p = get_sensor_list();
 	rt_uint8_t i = 0;
 
 	while(p != RT_NULL)
@@ -90,11 +155,18 @@ void get_query_sensor_value(rt_uint8_t which)
 }
 
 
-// 关联未做？？？？？？
+/**
+ * 设置传感器设置值 （温度，酸碱，溶氧）
+ *
+ * @param b:8位数据（定义详见协议）
+ *
+ * @return 
+ */
 void set_query_sensor_value(rt_uint8_t *b)
 {
+// 关联未做？？？？？？
 #if ( RS485_EN > 0 )
-	Position p = sensor;
+	Position p = get_sensor_list();
 	rt_uint8_t i = 0;
 
 	while(p != RT_NULL)
@@ -122,10 +194,17 @@ void set_query_sensor_value(rt_uint8_t *b)
 }
 
 
+/**
+ * 获取定时器组数
+ *
+ * @param 
+ *
+ * @return 
+ */
 void get_time_cnt(void)
 {
 #if ( RS485_EN > 0 )
-	Position p = sensor;
+	Position p = get_sensor_list();
 	rt_uint8_t cnt = 0;
 
 	while(p != RT_NULL)
@@ -144,10 +223,17 @@ void get_time_cnt(void)
 }
 
 
+/**
+ * 获取定时器设置值
+ *
+ * @param which:哪一组
+ *
+ * @return 
+ */
 void get_time_value(rt_uint8_t which)
 {
 #if ( RS485_EN > 0 )
-	Position p = sensor;
+	Position p = get_sensor_list();
 	rt_uint8_t i = 0;
 
 	while(p != RT_NULL)
@@ -230,10 +316,17 @@ void get_time_value(rt_uint8_t which)
 }
 
 
+/**
+ * 设置定时器设置值 
+ *
+ * @param b:6位数据（定义详见协议）
+ *
+ * @return 
+ */
 void set_time_value(rt_uint8_t *b)
 {
 #if ( RS485_EN > 0 )
-	Position p = sensor;
+	Position p = get_sensor_list();
 	rt_uint8_t i = 0;
 
 	while(p != RT_NULL)

@@ -1,12 +1,11 @@
 #include "warn.h"
-#include "rtc.h"
 
 
 #if ( WARN_TIMER > 0 )
 
 void warn_judge_timer(Position p)
 {
-	rt_uint16_t t = get_hh_mm();
+	rt_uint16_t t = get_system_hh_mm();
 	
 	if((t > p->item.time1_start) && (t < p->item.time1_end))
 	{

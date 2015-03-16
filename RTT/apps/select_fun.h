@@ -14,9 +14,9 @@ typedef struct
 	rt_uint8_t	warn_power_drop;
 
 }SelectFun;
-extern SelectFun fun;
 
 
+SelectFun get_select_fun(void);
 void read_select_fun_from_flash(void);
 
 #endif

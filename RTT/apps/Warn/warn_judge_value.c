@@ -3,20 +3,6 @@
 
 #if ( WARN_VALUE > 0 )
 
-static rt_uint8_t warn_status;
-
-rt_uint8_t get_warn_status(void)
-{
-	return warn_status;
-}
-
-
-void set_warn_status(rt_uint8_t w)
-{
-	warn_status = w;
-}
-
-
 void warn_judge_value(Position p)
 {
 	// sensor1_ch1 小于最小值，大于最大值（电流）

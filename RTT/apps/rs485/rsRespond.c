@@ -1,5 +1,4 @@
 #include <rs485.h>
-#include "rtc.h"
 
 #if ( RS485_EN > 0 )
 
@@ -37,7 +36,7 @@ void x04_respond(rt_uint8_t *b)
 void rec_last_time(rt_uint8_t *b)
 {
 	Element *e = find_sensor(b);
-	e->last_rec_time = get_rs485_timer();
+	e->last_rec_time = _get_rs485_time();
 }
 
 #endif

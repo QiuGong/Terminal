@@ -32,18 +32,9 @@ enum Flash_Data{ F_SELECT_FUN 	= 0x08030000,
 
 
 /*****************flash.c*******************/
-void _flash_erase(rt_uint32_t START_ADDR, rt_uint32_t END_ADDR);
-void _flash_write(rt_uint16_t *pdata, rt_uint32_t START_ADDR, rt_uint16_t Len);
+void 	_flash_erase(rt_uint32_t START_ADDR, rt_uint32_t END_ADDR);
+void 	_flash_write(rt_uint16_t *pdata, rt_uint32_t START_ADDR, rt_uint16_t Len);
 rt_uint8_t _flash_write_check(rt_uint16_t *pdata, rt_uint32_t START_ADDR, rt_uint16_t Len);
-
-
-/*****************boot.c*******************/
-rt_uint8_t 	Write_FLASH_Boot(rt_uint16_t Num, rt_uint16_t *p);
-
-
-/*****************upgrade.c*******************/
-rt_uint8_t  Write_FLASH_Upgrade(rt_uint8_t Page,rt_uint8_t *p);
-void 	Write_FLASH_Upgrade_Mark(rt_uint16_t Num, rt_uint16_t *p);
 
 
 /*****************data.c*******************/
@@ -52,8 +43,7 @@ void 	Flash_Read(enum Flash_Data type, rt_uint32_t ops, rt_uint8_t *b, rt_uint16
 void 	Flash_Erase_Para(void);
 
 
-/*****************ISP.c*******************/
-void 	Up_Data(void);//Éý¼¶
+/*****************backup.c*******************/
 
 
 #endif

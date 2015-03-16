@@ -1,5 +1,4 @@
 #include "warn.h"
-#include "rtc.h"
 
 
 #if ( WARN_TIME_OUT > 0 )
@@ -11,7 +10,7 @@
 
 void warn_time_out(Position p)
 {
-	rt_uint32_t	t = get_rs485_timer();
+	rt_uint32_t	t = get_rs485_running();
    	rt_uint32_t	d = t > p->item.last_rec_time ? t - p->item.last_rec_time : p->item.last_rec_time - t;
 	
 	if(d > TIME_OUT_MAX)

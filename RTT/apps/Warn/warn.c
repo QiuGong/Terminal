@@ -1,5 +1,4 @@
 #include "warn.h"
-#include "select_fun.h"
 
 
 #if ( WARN_EN > 0 )
@@ -394,35 +393,34 @@ static void control_set(void)
 }
 
 
-extern List sensor;
 static void warn_callBack(void *parameter)
 {
-	Position p = sensor;
+	Position p = get_sensor_list();
 	while(p != RT_NULL)
 	{
 		#if ( WARN_TIMER > 0 )
-		if(fun.warn_timer == 1)
+		if(get_fun_enable().warn_timer == 1)
 		{
 			warn_judge_timer(p);
 		}
 		#endif
 		
 		#if ( WARN_VALUE > 0 )
-		if(fun.warn_value == 1)
+		if(get_fun_enable().warn_value == 1)
 		{
 			warn_judge_value(p);
 		}
 		#endif
 
 		#if ( WARN_TIME_OUT > 0 )
-		if(fun.warn_time_out == 1)
+		if(get_fun_enable().warn_time_out == 1)
 		{
 			warn_time_out(p);
 		}
 		#endif
 
 		#if ( WARN_RELATE > 0 )
-		if(fun.warn_relate == 1)
+		if(get_fun_enable().warn_relate == 1)
 		{
 			warn_relate(p);
 		}
@@ -434,7 +432,7 @@ static void warn_callBack(void *parameter)
 
 
 	#if ( WARN_POWER_DROP > 0 )
-	if(fun.warn_power_drop == 1)
+	if(get_fun_enable().warn_power_drop == 1)
 	{
 		warn_power_drop();
 	}
@@ -445,10 +443,11 @@ static void warn_callBack(void *parameter)
 
 
 static struct rt_timer time_warn;
-void init_time_warn(void)
+void _init_time_warn(void)
 {
 	RT_DEBUG_LOG(DEBUG_WARN, ("init time warn.\n"));
-	
+
+	warn_device_init();
 	rt_timer_init(&time_warn, "warn", warn_callBack, RT_NULL, 300, RT_TIMER_FLAG_SOFT_TIMER | RT_TIMER_FLAG_PERIODIC); 
    	rt_timer_start(&time_warn);
 }

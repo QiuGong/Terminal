@@ -38,10 +38,8 @@
 #define U_PH                    	0x02
 #define U_DO                    	0x03
 
-
 //传感器数据查询
 #define U_SENSOR_CMD                0x02
-
 
 //查询传感器个数
 #define U_QUERY_SENSOR_CMD          0x03
@@ -52,7 +50,6 @@
 //设置传感器n值
 #define U_QUERY_SENSOR_SET_CMD      0x05
 
-
 //查询定时器个数
 #define U_QUERY_TIMER_CMD           0x06
 
@@ -62,8 +59,8 @@
 //设置定时器n值
 #define U_QUERY_TIMER_SET_CMD       0x08
 
-void display_rec_thread_entry(void* parameter);
-void display_send(rt_uint8_t *b, rt_uint8_t len);
+void _display_rec_thread_entry(void* parameter);
+void _display_send(rt_uint8_t *b, rt_uint8_t len);
 
 
 /*****************rsRequest.c*******************/
@@ -90,6 +87,9 @@ void x08_dsp_respond(rt_uint8_t *b);
 
 
 /*****************convert.c*******************/
+void display_rec_thread_entry(void* parameter);
+void get_UTC8_time(rt_uint8_t *buf);
+void set_UTC8_time(rt_uint8_t year, rt_uint8_t mon, rt_uint8_t day, rt_uint8_t hour, rt_uint8_t min, rt_uint8_t sec);
 void get_sensor_value(void);
 void get_query_sensor_cnt(void);
 void get_query_sensor_value(rt_uint8_t which);

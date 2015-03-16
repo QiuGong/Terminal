@@ -44,7 +44,7 @@ static rt_err_t uart_input(rt_device_t dev, rt_size_t size)
 
 
 static void parse(rt_uint8_t *b);
-void display_rec_thread_entry(void* parameter)
+void _display_rec_thread_entry(void* parameter)
 {
 	rt_device_t device;
 	rt_err_t result = RT_EOK;
@@ -81,7 +81,7 @@ void display_rec_thread_entry(void* parameter)
 }
 
 
-void display_send(rt_uint8_t *buf, rt_uint8_t len)
+void _display_send(rt_uint8_t *buf, rt_uint8_t len)
 {					
 	rt_uint8_t i; 
 	 

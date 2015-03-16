@@ -58,7 +58,7 @@ static void init_enable_rs485(void)
 
 
 static void parse(rt_uint8_t *b);
-void rs485_rec_thread_entry(void* parameter)
+void _rs485_rec_thread_entry(void* parameter)
 {
 	rt_device_t device;
 	rt_err_t result = RT_EOK;

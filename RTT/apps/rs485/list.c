@@ -1,5 +1,5 @@
-#include <rs485.h>
 #include <string.h>
+#include <rs485.h>
 
 
 #if ( RS485_EN > 0 )

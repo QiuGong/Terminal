@@ -108,13 +108,13 @@ enum X01_CONTROL{ ON = 0x01, OFF = 0x00};
 
 
 
-void rs485_rec_thread_entry(void* parameter);
+void _rs485_rec_thread_entry(void* parameter);
 void re485_send(rt_uint8_t *b, rt_uint8_t len);
 
 
 /*****************rsRequest.c*******************/
 void x01_request(rt_uint8_t *id, enum X01_DEV dev, enum X01_CONTROL control);
-rt_uint32_t get_rs485_timer(void);
+rt_uint32_t _get_rs485_time(void);
 void rs485_send_thread_entry(void *parameter);
 
 
@@ -289,7 +289,6 @@ typedef struct node/*节点的定义*/
 
 typedef  PNode Position;
 typedef  PNode List;
-extern 	 List  sensor;
 
 List MakeEmpty(List L);
 Position Find(void *b, List L);
@@ -297,6 +296,17 @@ Position FindPrevious(void *b, List L);
 void Insert(Position P);
 void* Delete(void *b, List sensor);
 unsigned char Length(List L);
+
+
+/*****************rsInterface.c*******************/
+List get_sensor_list(void);
+List _get_sensor_list(void);
+void rs485_rec_thread_entry(void* parameter);
+rt_uint32_t get_rs485_time(void);
+rt_uint16_t get_max_len(void);
+void refresh_to_flash(rt_uint8_t *buf, rt_uint16_t len);
+void read_from_flash(rt_uint8_t *buf, rt_uint16_t len);
+void print_sensor(Position p, rt_uint8_t i);
 
 
 #endif

@@ -3,7 +3,7 @@
 
 
 #if ( RS485_EN > 0 )
-static rt_uint32_t rs485_timer = 0;
+static rt_uint32_t rs485_time = 0;
 
 
 static void fill_request(rt_uint8_t *b, rt_uint8_t *id, rt_uint8_t cmd, rt_uint8_t *d)
@@ -43,9 +43,9 @@ static void x02_x03_x04_request(rt_uint8_t *id, rt_uint8_t cmd)
 }
 
 
-rt_uint32_t get_rs485_timer(void)
+rt_uint32_t _get_rs485_time(void)
 {
-	return rs485_timer;
+	return rs485_time;
 }
 
 
@@ -54,12 +54,12 @@ void rs485_send_thread_entry(void *parameter)
 {	
 	while (RT_TRUE)
 	{
-		Position p = sensor;
+		Position p = _get_sensor_list();
 	
-		if(sensor == NULL)
+		if(_get_sensor_list() == NULL)
 		{
 		 	read_sensor_from_flash();
-			p = sensor;
+			p = _get_sensor_list();
 		}
 	
 		while(p != NULL){
@@ -82,7 +82,7 @@ void rs485_send_thread_entry(void *parameter)
 		}
 		
 		rt_thread_delay(300);
-		rs485_timer ++;		
+		rs485_time ++;		
 	}
 }
 

@@ -63,8 +63,7 @@ void rt_init_thread_entry(void* parameter)
 #endif
 
 #if ( WARN_EN > 0 )
-	init_time_warn();
-	warn_device_init();
+	warn_timer_start();
 #endif
 
 #if ( SIM900_EN > 0 )

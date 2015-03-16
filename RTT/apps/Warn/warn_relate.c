@@ -5,7 +5,6 @@
 
 /* BELL,LED ÖÃÎ»,¿ª	*/
 #define SET			0x03000300 
-#define TIME_MAX	5
 
 
 #define k1(x) 		(x & (0x0001 << (9 - 1)))
