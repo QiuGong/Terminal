@@ -88,15 +88,16 @@ void x08_dsp_respond(rt_uint8_t *b);
 
 
 /*****************convert.c*******************/
+rt_uint8_t _get_warn_flag(void);
 void display_rec_thread_entry(void* parameter);
-void get_UTC8_time(rt_uint8_t *buf);
-void set_UTC8_time(rt_uint8_t year, rt_uint8_t mon, rt_uint8_t day, rt_uint8_t hour, rt_uint8_t min, rt_uint8_t sec);
-void get_sensor_value(void);
-void get_query_sensor_cnt(void);
-void get_query_sensor_value(rt_uint8_t which);
-void set_query_sensor_value(rt_uint8_t *b);
-void get_time_cnt(void);
-void get_time_value(rt_uint8_t which);
-void set_time_value(rt_uint8_t *d);
+void _get_UTC8_time(rt_uint8_t *buf);
+void _set_UTC8_time(rt_uint8_t year, rt_uint8_t mon, rt_uint8_t day, rt_uint8_t hour, rt_uint8_t min, rt_uint8_t sec);
+void _get_sensor_value(void);
+void _get_query_sensor_cnt(void);
+void _get_query_sensor_value(rt_uint8_t which);
+void _set_query_sensor_value(rt_uint8_t *b);
+void _get_time_cnt(void);
+void _get_time_value(rt_uint8_t which);
+void _set_time_value(rt_uint8_t *d);
 
 #endif

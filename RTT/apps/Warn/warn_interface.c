@@ -11,7 +11,7 @@
  *
  * @return 前8位时，后8位分 
  */
-rt_uint16_t get_system_hh_mm(void)
+rt_uint16_t _get_system_hh_mm(void)
 {
 	return get_hh_mm();
 }
@@ -24,7 +24,7 @@ rt_uint16_t get_system_hh_mm(void)
  *
  * @return 
  */
-rt_uint32_t get_rs485_running(void)
+rt_uint32_t _get_rs485_running(void)
 {
 	return get_rs485_time();
 }
@@ -50,9 +50,35 @@ void warn_timer_start(void)
  *
  * @return 
  */
-SelectFun get_fun_enable(void)
+SelectFun _get_fun_enable(void)
 {
 	return get_select_fun();
+}
+
+
+/**
+ * 获取阈值报警
+ *
+ * @param 
+ *
+ * @return 
+ */
+rt_uint8_t get_value_warn_flag(void)
+{
+	return 	_get_value_warn_flag();
+}
+
+
+/**
+ * 获取超时报警
+ *
+ * @param 
+ *
+ * @return 
+ */
+rt_uint8_t get_timeout_warn_flag(void)
+{
+	return 	_get_timeout_warn_flag();
 }
 
 #endif

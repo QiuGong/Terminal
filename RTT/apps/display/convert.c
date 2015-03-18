@@ -3,9 +3,46 @@
 #include "rtc.h"
 #include "formula.h"
 #include "strLib.h"
+#include "warn.h"
 
 
 #if ( DISPLAY_EN > 0 )
+
+/**
+ * 获取报警标志
+ *
+ * @param 
+ *
+ * @return 
+ */
+rt_uint8_t _get_warn_flag(void)
+{		
+	rt_uint8_t flag = U_NORMAL;
+	
+	// 超时
+	if(get_timeout_warn_flag() == 1)
+	{
+		flag = U_TIMEOUT;
+	}
+	// 溶氧
+	else if(get_value_warn_flag() == 2)
+	{
+		flag = U_DO;
+	}
+	// PH
+	else if(get_value_warn_flag() == 3)
+	{
+		flag = U_PH;
+	}
+	// 温度
+	else if(get_value_warn_flag() == 4)
+	{
+		flag = U_TEMP;
+	}
+
+	return flag;	
+}
+
 
 /**
  * 显示屏接收线程
@@ -27,7 +64,7 @@ void display_rec_thread_entry(void* parameter)
  *
  * @return 
  */
-void get_UTC8_time(rt_uint8_t *buf)
+void _get_UTC8_time(rt_uint8_t *buf)
 {
 #if ( DS1302_EN > 0 )
 	get_time(buf);
@@ -42,7 +79,7 @@ void get_UTC8_time(rt_uint8_t *buf)
  *
  * @return 
  */
-void set_UTC8_time(rt_uint8_t year, rt_uint8_t mon, rt_uint8_t day, rt_uint8_t hour, rt_uint8_t min, rt_uint8_t sec)
+void _set_UTC8_time(rt_uint8_t year, rt_uint8_t mon, rt_uint8_t day, rt_uint8_t hour, rt_uint8_t min, rt_uint8_t sec)
 {
 #if ( DS1302_EN > 0 )
 	set_rtc(year, mon, day, hour, min, sec);	
@@ -57,7 +94,7 @@ void set_UTC8_time(rt_uint8_t year, rt_uint8_t mon, rt_uint8_t day, rt_uint8_t h
  *
  * @return 
  */
-void get_sensor_value(void)
+void _get_sensor_value(void)
 {
 #if ( RS485_EN > 0 )
 	Position p = get_sensor_list();
@@ -98,7 +135,7 @@ void get_sensor_value(void)
  *
  * @return 
  */
-void get_query_sensor_cnt(void)
+void _get_query_sensor_cnt(void)
 {
 #if ( RS485_EN > 0 )
 	Position p = get_sensor_list();
@@ -127,7 +164,7 @@ void get_query_sensor_cnt(void)
  *
  * @return 
  */
-void get_query_sensor_value(rt_uint8_t which)
+void _get_query_sensor_value(rt_uint8_t which)
 {
 // 关联未做？？？？？？
 #if ( RS485_EN > 0 )
@@ -162,7 +199,7 @@ void get_query_sensor_value(rt_uint8_t which)
  *
  * @return 
  */
-void set_query_sensor_value(rt_uint8_t *b)
+void _set_query_sensor_value(rt_uint8_t *b)
 {
 // 关联未做？？？？？？
 #if ( RS485_EN > 0 )
@@ -201,7 +238,7 @@ void set_query_sensor_value(rt_uint8_t *b)
  *
  * @return 
  */
-void get_time_cnt(void)
+void _get_time_cnt(void)
 {
 #if ( RS485_EN > 0 )
 	Position p = get_sensor_list();
@@ -230,7 +267,7 @@ void get_time_cnt(void)
  *
  * @return 
  */
-void get_time_value(rt_uint8_t which)
+void _get_time_value(rt_uint8_t which)
 {
 #if ( RS485_EN > 0 )
 	Position p = get_sensor_list();
@@ -323,7 +360,7 @@ void get_time_value(rt_uint8_t which)
  *
  * @return 
  */
-void set_time_value(rt_uint8_t *b)
+void _set_time_value(rt_uint8_t *b)
 {
 #if ( RS485_EN > 0 )
 	Position p = get_sensor_list();

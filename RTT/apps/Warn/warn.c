@@ -399,28 +399,28 @@ static void warn_callBack(void *parameter)
 	while(p != RT_NULL)
 	{
 		#if ( WARN_TIMER > 0 )
-		if(get_fun_enable().warn_timer == 1)
+		if(_get_fun_enable().warn_timer == 1)
 		{
 			warn_judge_timer(p);
 		}
 		#endif
 		
 		#if ( WARN_VALUE > 0 )
-		if(get_fun_enable().warn_value == 1)
+		if(_get_fun_enable().warn_value == 1)
 		{
 			warn_judge_value(p);
 		}
 		#endif
 
 		#if ( WARN_TIME_OUT > 0 )
-		if(get_fun_enable().warn_time_out == 1)
+		if(_get_fun_enable().warn_time_out == 1)
 		{
 			warn_time_out(p);
 		}
 		#endif
 
 		#if ( WARN_RELATE > 0 )
-		if(get_fun_enable().warn_relate == 1)
+		if(_get_fun_enable().warn_relate == 1)
 		{
 			warn_relate(p);
 		}
@@ -432,7 +432,7 @@ static void warn_callBack(void *parameter)
 
 
 	#if ( WARN_POWER_DROP > 0 )
-	if(get_fun_enable().warn_power_drop == 1)
+	if(_get_fun_enable().warn_power_drop == 1)
 	{
 		warn_power_drop();
 	}

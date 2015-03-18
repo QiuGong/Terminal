@@ -1,7 +1,11 @@
 #include "warn.h"
 
 
-#define MIDDLE_VALUE		1
+#if ( WARN_EN > 0 )
+	#define MIDDLE_VALUE		1
+#else
+	#define MIDDLE_VALUE		0
+#endif
 
 
 // 最大值标志
@@ -15,7 +19,22 @@
 #define false_15(x)			(x &= 0xBFFF)
 
 
+#define NORMAL				0x00
+#define S1_C1              	0x01
+#define S1_C2               0x02
+#define S2_C1               0x03
+#define S2_C2               0x04
+
+
 #if ( WARN_VALUE > 0 )
+
+static rt_uint8_t 	value_warn_flag;
+rt_uint8_t _get_value_warn_flag(void)
+{
+	return 	value_warn_flag;
+}
+
+
 void warn_judge_value(Position p)
 {
 	// sensor1_ch1 小于最小值，大于最大值（电流）
@@ -23,6 +42,7 @@ void warn_judge_value(Position p)
 	|| ((p->item.sensor1_ch1 > p->item.sensor1_ch1_max) && (p->item.sensor1_ch1_max != 0)))
 	{
 		#if ( WARN_EN > 0 )
+			value_warn_flag = S1_C1;
 			warn_judge_set(p, p->item.sensor1_ch1_set, WHICH_WARN_VALUE);
 		#endif
 
@@ -53,6 +73,13 @@ void warn_judge_value(Position p)
 	}
 	else
 	{
+		#if ( WARN_EN > 0 )
+			if(value_warn_flag == S1_C1)
+			{
+				value_warn_flag = NORMAL;
+			}
+		#endif
+		
 		#if ( MIDDLE_VALUE > 0 )
 			// 设置
 			if(p->item.sensor1_ch1_mid > 0)
@@ -80,6 +107,7 @@ void warn_judge_value(Position p)
 	|| ((p->item.sensor1_ch2 > p->item.sensor1_ch2_max) && (p->item.sensor1_ch2_max != 0)))
 	{
 		#if ( WARN_EN > 0 )
+			value_warn_flag = S1_C2;
 			warn_judge_set(p, p->item.sensor1_ch2_set, WHICH_WARN_VALUE);
 		#endif
 
@@ -110,6 +138,13 @@ void warn_judge_value(Position p)
 	}
 	else
 	{
+		#if ( WARN_EN > 0 )
+			if(value_warn_flag == S1_C2)
+			{
+				value_warn_flag = NORMAL;
+			}
+		#endif
+		
 		#if ( MIDDLE_VALUE > 0 )
 			// 设置
 			if(p->item.sensor1_ch2_mid > 0)
@@ -137,6 +172,7 @@ void warn_judge_value(Position p)
 	|| ((p->item.sensor2_ch1 > p->item.sensor2_ch1_max) && (p->item.sensor2_ch1_max != 0)))
 	{
 		#if ( WARN_EN > 0 )
+			value_warn_flag = S2_C1;
 			warn_judge_set(p, p->item.sensor2_ch1_set, WHICH_WARN_VALUE);
 		#endif
 
@@ -167,6 +203,13 @@ void warn_judge_value(Position p)
 	}
 	else
 	{
+		#if ( WARN_EN > 0 )
+			if(value_warn_flag == S2_C1)
+			{
+				value_warn_flag = NORMAL;
+			}
+		#endif
+		
 		#if ( MIDDLE_VALUE > 0 )
 			// 设置
 			if(p->item.sensor2_ch1_mid > 0)
@@ -194,6 +237,7 @@ void warn_judge_value(Position p)
 	|| ((p->item.sensor2_ch2 > p->item.sensor2_ch2_max) && (p->item.sensor2_ch2_max != 0)))
 	{
 		#if ( WARN_EN > 0 )
+			value_warn_flag = S2_C2;
 			warn_judge_set(p, p->item.sensor2_ch2_set, WHICH_WARN_VALUE);
 		#endif
 
@@ -224,6 +268,13 @@ void warn_judge_value(Position p)
 	}
 	else
 	{
+		#if ( WARN_EN > 0 )
+			if(value_warn_flag == S2_C2)
+			{
+				value_warn_flag = NORMAL;
+			}
+		#endif
+		
 		#if ( MIDDLE_VALUE > 0 )
 			// 设置
 			if(p->item.sensor2_ch2_mid > 0)

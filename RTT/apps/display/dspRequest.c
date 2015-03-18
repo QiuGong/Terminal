@@ -22,7 +22,7 @@ static void x01_dsp_request(void)
     uint8_t d[U_DATA_LEN];
 
     memset(d, 0x00, U_DATA_LEN);
-	get_UTC8_time(d+1);
+	_get_UTC8_time(d+1);
     d[0] = (2000 + bcd8_to_hex8(d[1]))>>8;
 	d[1] = (2000 + bcd8_to_hex8(d[1]));
 	d[2] = bcd8_to_hex8(d[2]); 
@@ -30,7 +30,7 @@ static void x01_dsp_request(void)
 	d[4] = bcd8_to_hex8(d[4]); 
 	d[5] = bcd8_to_hex8(d[5]);
 	d[6] = bcd8_to_hex8(d[6]);
-	d[7] = 0;
+	d[7] = _get_warn_flag();
    
     fill_request(b, U_TIME_CMD, d);
     _display_send(b, U_ALL_LEN);
