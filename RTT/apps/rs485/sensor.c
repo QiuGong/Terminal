@@ -105,18 +105,22 @@ void refresh_sensor_to_flash(void)
 		// 传感器最大最小值
 		len += negative((rt_uint8_t *)&(p->item.sensor1_ch1_min), buf+len, SENSOR_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.sensor1_ch1_max), buf+len, SENSOR_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor1_ch1_mid), buf+len, SENSOR_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.sensor1_ch1_set), buf+len, SENSOR_SET_PER_LEN);
 
 		len += negative((rt_uint8_t *)&(p->item.sensor1_ch2_min), buf+len, SENSOR_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.sensor1_ch2_max), buf+len, SENSOR_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor1_ch2_mid), buf+len, SENSOR_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.sensor1_ch2_set), buf+len, SENSOR_SET_PER_LEN);
 
 		len += negative((rt_uint8_t *)&(p->item.sensor2_ch1_min), buf+len, SENSOR_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.sensor2_ch1_max), buf+len, SENSOR_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor2_ch1_mid), buf+len, SENSOR_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.sensor2_ch1_set), buf+len, SENSOR_SET_PER_LEN);
 
 		len += negative((rt_uint8_t *)&(p->item.sensor2_ch2_min), buf+len, SENSOR_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.sensor2_ch2_max), buf+len, SENSOR_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor2_ch2_mid), buf+len, SENSOR_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.sensor2_ch2_set), buf+len, SENSOR_SET_PER_LEN);
 
 		// 时间开始结束
@@ -232,18 +236,22 @@ void read_sensor_from_flash(void)
 			// 传感器最大最小值
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch1_min), SENSOR_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch1_max), SENSOR_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch1_mid), SENSOR_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch1_set), SENSOR_SET_PER_LEN);
 	
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch2_min), SENSOR_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch2_max), SENSOR_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch2_mid), SENSOR_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch2_set), SENSOR_SET_PER_LEN);
 	
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch1_min), SENSOR_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch1_max), SENSOR_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch1_mid), SENSOR_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch1_set), SENSOR_SET_PER_LEN);
 	
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch2_min), SENSOR_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch2_max), SENSOR_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch2_mid), SENSOR_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch2_set), SENSOR_SET_PER_LEN);
 	
 			// 时间开始,结束,设置
@@ -332,7 +340,7 @@ void list_sensor()
 
 	while(p != RT_NULL)
 	{	
-		print_sensor(p, i);
+		print_sensor(p, &i);
 		p = p->next;
 	}
 }
@@ -380,24 +388,44 @@ void del_sensor(rt_uint8_t id)
 FINSH_FUNCTION_EXPORT(del_sensor, e.g: del_sensor(1))
 
 
-void plus_sensor(rt_uint8_t b1,rt_uint8_t b2,rt_uint8_t b3,rt_uint8_t b4, rt_uint8_t b5, rt_uint8_t b6,
+void add_ssr_hex(rt_uint8_t b1,rt_uint8_t b2,rt_uint8_t b3,rt_uint8_t b4, rt_uint8_t b5, rt_uint8_t b6,
 				 rt_uint8_t b7,rt_uint8_t b8,rt_uint8_t b9,rt_uint8_t b10,rt_uint8_t b11,rt_uint8_t b12)
 {	
 	rt_uint8_t buf[ID_LEN];
 
-	buf[0] = b1; buf[1] = b2; 	buf[2] = b3; 	buf[3] = b4;
-	buf[4] = b5; buf[5] = b6; 	buf[6] = b7; 	buf[7] = b8;
-	buf[8] = b9; buf[9] = b10; 	buf[10] = b11; 	buf[11] = b12;	
+	buf[0]  = hex8_to_bcd8(b1); 	buf[1]  = hex8_to_bcd8(b2); 	
+	buf[2]  = hex8_to_bcd8(b3); 	buf[3]  = hex8_to_bcd8(b4);
+	buf[4]  = hex8_to_bcd8(b5); 	buf[5]  = hex8_to_bcd8(b6); 	
+	buf[6]  = hex8_to_bcd8(b7); 	buf[7]  = hex8_to_bcd8(b8);
+	buf[8]  = hex8_to_bcd8(b9); 	buf[9]  = hex8_to_bcd8(b10); 	
+	buf[10] = hex8_to_bcd8(b11); 	buf[11] = hex8_to_bcd8(b12);	
 
 	if(add_sensor(buf) == RT_TRUE)
 	{
 		refresh_sensor_to_flash();	
 	}	
 }
-FINSH_FUNCTION_EXPORT(plus_sensor, e.g: plus_sensor(121,0,6,0,34,0,0,0,0,0,52,48))
+FINSH_FUNCTION_EXPORT(add_ssr_hex, e.g: add_ssr_hex(79,0,6,0,22,0,0,0,0,0,34,30))
 
 
-void sensor_set(rt_uint8_t id, rt_uint8_t ch, rt_uint16_t min, rt_uint16_t max, rt_uint16_t set)
+void add_ssr_bcd(rt_uint8_t b1,rt_uint8_t b2,rt_uint8_t b3,rt_uint8_t b4, rt_uint8_t b5, rt_uint8_t b6,
+				 rt_uint8_t b7,rt_uint8_t b8,rt_uint8_t b9,rt_uint8_t b10,rt_uint8_t b11,rt_uint8_t b12)
+{	
+	rt_uint8_t buf[ID_LEN];
+
+	buf[0]  = b1; 	buf[1]  = b2; 	buf[2]  = b3; 	buf[3]  = b4;
+	buf[4]  = b5; 	buf[5]  = b6; 	buf[6]  = b7; 	buf[7]  = b8;
+	buf[8]  = b9; 	buf[9]  = b10; 	buf[10] = b11; 	buf[11] = b12;	
+
+	if(add_sensor(buf) == RT_TRUE)
+	{
+		refresh_sensor_to_flash();	
+	}	
+}
+FINSH_FUNCTION_EXPORT(add_ssr_bcd, e.g: add_ssr_bcd(121,0,6,0,34,0,0,0,0,0,52,48))
+
+
+void sensor_set(rt_uint8_t id, rt_uint8_t ch, rt_uint16_t min, rt_uint16_t max, rt_uint16_t mid, rt_uint16_t set)
 {																																																				  
 	Position p = sensor;
 	rt_uint8_t i = 0;	
@@ -410,24 +438,28 @@ void sensor_set(rt_uint8_t id, rt_uint8_t ch, rt_uint16_t min, rt_uint16_t max, 
 			{
 				p->item.sensor1_ch1_min = min;
 				p->item.sensor1_ch1_max = max;
+				p->item.sensor1_ch1_mid = mid;
 				p->item.sensor1_ch1_set = set;
 			}
 			else if(ch == 2)
 			{
 				p->item.sensor1_ch2_min = min;
 				p->item.sensor1_ch2_max = max;
+				p->item.sensor1_ch2_mid = mid;
 				p->item.sensor1_ch2_set = set;
 			}
 			else if(ch == 3)
 			{
 				p->item.sensor2_ch1_min = min;
 				p->item.sensor2_ch1_max = max;
+				p->item.sensor2_ch1_mid = mid;
 				p->item.sensor2_ch1_set = set;
 			}
 			else if(ch == 4)
 			{
 				p->item.sensor2_ch2_min = min;
 				p->item.sensor2_ch2_max = max;
+				p->item.sensor2_ch2_mid = mid;
 				p->item.sensor2_ch2_set = set;
 			}	
 			refresh_sensor_to_flash();
@@ -437,7 +469,7 @@ void sensor_set(rt_uint8_t id, rt_uint8_t ch, rt_uint16_t min, rt_uint16_t max, 
 		p = p->next;
 	}
 }
-FINSH_FUNCTION_EXPORT(sensor_set, e.g: sensor_set(1,1,100,500,255))
+FINSH_FUNCTION_EXPORT(sensor_set, e.g: sensor_set(1,1,100,500,50,255))
 
 
 void sensor_time(rt_uint8_t id, rt_uint8_t ch, rt_uint16_t start, rt_uint16_t end, rt_uint16_t set)

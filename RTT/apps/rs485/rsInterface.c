@@ -93,19 +93,19 @@ void read_from_flash(rt_uint8_t *buf, rt_uint16_t len)
  *
  * @return 
  */
-void print_sensor(Position p, rt_uint8_t i)
+void print_sensor(Position p, rt_uint8_t *i)
 {
-	RT_DEBUG_LOG(DEBUG_RS485, ("-----------------------%d-------------------\n",(++i)));
+	RT_DEBUG_LOG(DEBUG_RS485, ("-----------------------%d-------------------\n", ++(*i)));
 	RT_DEBUG_LOG(DEBUG_RS485, ("Id:%02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X\n", p->item.id[0], p->item.id[1], p->item.id[2], p->item.id[3], p->item.id[4], p->item.id[5], p->item.id[6], p->item.id[7], p->item.id[8], p->item.id[9], p->item.id[10], p->item.id[11]));
 	RT_DEBUG_LOG(DEBUG_RS485, ("-------------------------------------------\n"));
 	RT_DEBUG_LOG(DEBUG_RS485, ("value set:%04X \n", p->item.value_set));
 	RT_DEBUG_LOG(DEBUG_RS485, ("timer set:%04X \n", p->item.timer_set));
 	RT_DEBUG_LOG(DEBUG_RS485, ("last rec time:%d \n", p->item.last_rec_time));
 	RT_DEBUG_LOG(DEBUG_RS485, ("-------------------------------------------\n"));
-	RT_DEBUG_LOG(DEBUG_RS485, ("s1_c1-> val:%d, min:%d, max:%d, set:%08X, 电流:%d, 最小:%d, 最大:%d \n", p->item.sensor1_ch1, p->item.sensor1_ch1_min, p->item.sensor1_ch1_max, p->item.sensor1_ch1_set, p->item.sensor1_ch1, 					p->item.sensor1_ch1_min, 					p->item.sensor1_ch1_max));
-	RT_DEBUG_LOG(DEBUG_RS485, ("s1_c2-> val:%d, min:%d, max:%d, set:%08X, 溶氧:%d, 最小:%d, 最大:%d \n", p->item.sensor1_ch2, p->item.sensor1_ch2_min, p->item.sensor1_ch2_max, p->item.sensor1_ch2_set, formula_do_16(p->item.sensor1_ch2), 	formula_do_16(p->item.sensor1_ch2_min), 	formula_do_16(p->item.sensor1_ch2_max)));
-	RT_DEBUG_LOG(DEBUG_RS485, ("s2_c1-> val:%d, min:%d, max:%d, set:%08X, 酸碱:%d, 最小:%d, 最大:%d \n", p->item.sensor2_ch1, p->item.sensor2_ch1_min, p->item.sensor2_ch1_max, p->item.sensor2_ch1_set, formula_ph_16(p->item.sensor2_ch1), 	formula_ph_16(p->item.sensor2_ch1_min), 	formula_ph_16(p->item.sensor2_ch1_max)));
-	RT_DEBUG_LOG(DEBUG_RS485, ("s2_c2-> val:%d, min:%d, max:%d, set:%08X, 温度:%d, 最小:%d, 最大:%d \n", p->item.sensor2_ch2, p->item.sensor2_ch2_min, p->item.sensor2_ch2_max, p->item.sensor2_ch2_set, formula_temp_16(p->item.sensor2_ch2), 	formula_temp_16(p->item.sensor2_ch2_min), 	formula_temp_16(p->item.sensor2_ch2_max)));	
+	RT_DEBUG_LOG(DEBUG_RS485, ("s1_c1-> val:%d, min:%d, max:%d, mid:%d, set:%08X, 电流:%d, 最小:%d, 最大:%d, 中间:%d \n", p->item.sensor1_ch1, p->item.sensor1_ch1_min, p->item.sensor1_ch1_max, p->item.sensor1_ch1_mid, p->item.sensor1_ch1_set, p->item.sensor1_ch1, 					p->item.sensor1_ch1_min, 					p->item.sensor1_ch1_max,				 p->item.sensor1_ch1_mid));
+	RT_DEBUG_LOG(DEBUG_RS485, ("s1_c2-> val:%d, min:%d, max:%d, mid:%d, set:%08X, 溶氧:%d, 最小:%d, 最大:%d, 中间:%d \n", p->item.sensor1_ch2, p->item.sensor1_ch2_min, p->item.sensor1_ch2_max, p->item.sensor1_ch2_mid, p->item.sensor1_ch2_set, formula_do_16(p->item.sensor1_ch2), 		formula_do_16(p->item.sensor1_ch2_min), 	formula_do_16(p->item.sensor1_ch2_max),	 formula_do_16(p->item.sensor1_ch2_mid)));
+	RT_DEBUG_LOG(DEBUG_RS485, ("s2_c1-> val:%d, min:%d, max:%d, mid:%d, set:%08X, 酸碱:%d, 最小:%d, 最大:%d, 中间:%d \n", p->item.sensor2_ch1, p->item.sensor2_ch1_min, p->item.sensor2_ch1_max, p->item.sensor2_ch1_mid, p->item.sensor2_ch1_set, formula_ph_16(p->item.sensor2_ch1), 		formula_ph_16(p->item.sensor2_ch1_min), 	formula_ph_16(p->item.sensor2_ch1_max),	 formula_ph_16(p->item.sensor2_ch1_mid)));
+	RT_DEBUG_LOG(DEBUG_RS485, ("s2_c2-> val:%d, min:%d, max:%d, mid:%d, set:%08X, 温度:%d, 最小:%d, 最大:%d, 中间:%d \n", p->item.sensor2_ch2, p->item.sensor2_ch2_min, p->item.sensor2_ch2_max, p->item.sensor2_ch2_mid, p->item.sensor2_ch2_set, formula_temp_16(p->item.sensor2_ch2), 	formula_temp_16(p->item.sensor2_ch2_min), 	formula_temp_16(p->item.sensor2_ch2_max),formula_temp_16(p->item.sensor2_ch2_mid)));	
 	RT_DEBUG_LOG(DEBUG_RS485, ("-------------------------------------------\n"));
 	RT_DEBUG_LOG(DEBUG_RS485, ("t1-> start:%04X,  end:%04X, set:%08X.\n", p->item.time1_start,  p->item.time1_end,  p->item.time1_set));
 	RT_DEBUG_LOG(DEBUG_RS485, ("t2-> start:%04X,  end:%04X, set:%08X.\n", p->item.time2_start,  p->item.time2_end,  p->item.time2_set));

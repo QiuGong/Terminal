@@ -71,7 +71,7 @@ enum X01_CONTROL{ ON = 0x01, OFF = 0x00};
 #define SENSOR_2    			0x03
 
 // 判断组数,每组长度
-#define SENSOR_JUDGE_NUM		0x04 * 2
+#define SENSOR_JUDGE_NUM		0x04 * 3
 #define SENSOR_PER_LEN			0x02
 
 // 超值控制值，超值控制值长度
@@ -177,21 +177,25 @@ typedef struct ELEMENT
 	rt_uint16_t	sensor1_ch1;// 电流
 	rt_uint16_t	sensor1_ch1_min;
 	rt_uint16_t	sensor1_ch1_max;
+	rt_uint16_t	sensor1_ch1_mid;
 	rt_uint32_t sensor1_ch1_set;
 
 	rt_uint16_t	sensor1_ch2;// 溶氧度
 	rt_uint16_t	sensor1_ch2_min;
 	rt_uint16_t	sensor1_ch2_max;
+	rt_uint16_t	sensor1_ch2_mid;
 	rt_uint32_t sensor1_ch2_set;
 
 	rt_uint16_t	sensor2_ch1;// PH
 	rt_uint16_t	sensor2_ch1_min;
 	rt_uint16_t	sensor2_ch1_max;
+	rt_uint16_t	sensor2_ch1_mid;
 	rt_uint32_t sensor2_ch1_set;
 
 	rt_uint16_t	sensor2_ch2;// 温度
 	rt_uint16_t	sensor2_ch2_min;
 	rt_uint16_t	sensor2_ch2_max;
+	rt_uint16_t	sensor2_ch2_mid;
 	rt_uint32_t	sensor2_ch2_set;
 
 	
@@ -306,7 +310,7 @@ rt_uint32_t get_rs485_time(void);
 rt_uint16_t get_max_len(void);
 void refresh_to_flash(rt_uint8_t *buf, rt_uint16_t len);
 void read_from_flash(rt_uint8_t *buf, rt_uint16_t len);
-void print_sensor(Position p, rt_uint8_t i);
+void print_sensor(Position p, rt_uint8_t *i);
 
 
 #endif

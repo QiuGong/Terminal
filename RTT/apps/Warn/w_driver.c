@@ -39,7 +39,6 @@ static void warn_led_init(void)
     GPIO_Init(WARN_LED_GPIO, &GPIO_InitStructure);
 
 	// 初始化定时器
-	RT_DEBUG_LOG(DEBUG_WARN, ("init time warn_led.\n"));
 	rt_timer_init(&time_warn_led, "w_led", w_led_callBack, RT_NULL, 30, RT_TIMER_FLAG_SOFT_TIMER | RT_TIMER_FLAG_PERIODIC); 
 }
 

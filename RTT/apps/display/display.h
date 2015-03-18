@@ -37,6 +37,7 @@
 #define U_TEMP                  	0x01
 #define U_PH                    	0x02
 #define U_DO                    	0x03
+#define U_TIMEOUT                   0x04
 
 //传感器数据查询
 #define U_SENSOR_CMD                0x02
