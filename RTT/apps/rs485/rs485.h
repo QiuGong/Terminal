@@ -175,26 +175,30 @@ typedef struct ELEMENT
 
 	// 传感器值，最小，最大，控制标志
 	rt_uint16_t	sensor1_ch1;// 电流
-	rt_uint16_t	sensor1_ch1_min;
-	rt_uint16_t	sensor1_ch1_max;
-	rt_uint16_t	sensor1_ch1_mid;
-	rt_uint32_t sensor1_ch1_set;
+	rt_uint16_t	sensor1_ch1_min;// 最大值
+	rt_uint16_t	sensor1_ch1_max;// 最小值
+    rt_uint8_t	sensor1_ch1_cnt;// 警报次数
+	rt_uint16_t	sensor1_ch1_mid;// 中间值
+	rt_uint32_t sensor1_ch1_set;// 设置
 
 	rt_uint16_t	sensor1_ch2;// 溶氧度
 	rt_uint16_t	sensor1_ch2_min;
 	rt_uint16_t	sensor1_ch2_max;
+	rt_uint8_t	sensor1_ch2_cnt;
 	rt_uint16_t	sensor1_ch2_mid;
 	rt_uint32_t sensor1_ch2_set;
 
 	rt_uint16_t	sensor2_ch1;// PH
 	rt_uint16_t	sensor2_ch1_min;
 	rt_uint16_t	sensor2_ch1_max;
+	rt_uint8_t	sensor2_ch1_cnt;
 	rt_uint16_t	sensor2_ch1_mid;
 	rt_uint32_t sensor2_ch1_set;
 
 	rt_uint16_t	sensor2_ch2;// 温度
 	rt_uint16_t	sensor2_ch2_min;
 	rt_uint16_t	sensor2_ch2_max;
+	rt_uint8_t	sensor2_ch2_cnt;
 	rt_uint16_t	sensor2_ch2_mid;
 	rt_uint32_t	sensor2_ch2_set;
 
