@@ -104,17 +104,21 @@ void _get_sensor_value(void)
 	{	
 		rt_uint16_t temp = 0, ph = 0, Do = 0;	
 
-		// 公式计算
-		temp = formula_temp_16(p->item.sensor2_ch2);
-		ph 	 = formula_ph_16(p->item.sensor2_ch1);
-		Do 	 = formula_do_16(p->item.sensor1_ch2);
-
-		// 发送
-		x02_dsp_request((++i), temp, ph, Do);
+		i++;				
+		if((p->item.sensor2_ch2 != 0) || (p->item.sensor2_ch1 != 0) || (p->item.sensor1_ch2 != 0))
+		{
+			// 公式计算
+			temp = formula_temp_16(p->item.sensor2_ch2);
+			ph 	 = formula_ph_16(p->item.sensor2_ch1);
+			Do 	 = formula_do_16(p->item.sensor1_ch2);
+	
+			// 发送
+			x02_dsp_request(i, temp, ph, Do);			
+	
+			// 延时5S
+			rt_thread_delay(500);
+		}
 		p = p->next;
-
-		// 延时3S
-		rt_thread_delay(300);
 	}
 
 	// 返回界面
