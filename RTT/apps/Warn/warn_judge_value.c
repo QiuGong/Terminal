@@ -1,6 +1,7 @@
 #include "warn.h"
 
 
+// 中间值
 #if ( WARN_EN > 0 )
 	#define MIDDLE_VALUE		1
 #else
@@ -24,6 +25,7 @@
 #define S2_C2               0x04
 
 
+// 延迟报警
 #if ( WARN_EN > 0 )
 	#define WARN_CNT			1
 #else
@@ -93,44 +95,36 @@ void warn_judge_value(Position p)
 	else
 	{
 		#if ( WARN_CNT > 0 )
-			if(p->item.sensor1_ch1_cnt ==  0)
+			p->item.sensor1_ch1_cnt = 0;
+		#endif
+
+		#if ( WARN_EN > 0 )
+			if(value_warn_flag == S1_C1)
 			{
-				#if ( WARN_EN > 0 )
-					if(value_warn_flag == S1_C1)
-					{
-						value_warn_flag = NORMAL;
-					}
-				#endif
-				
-				#if ( MIDDLE_VALUE > 0 )
-					// 设置
-					if(p->item.sensor1_ch1_mid > 0)
-					{
-						// 设置最小值
-						if(is_true_15(p->item.sensor1_ch1_mid))
-						{
-							false_15(p->item.sensor1_ch1_mid);
-							p->item.sensor1_ch1_min -= p->item.sensor1_ch1_mid;
-							RT_DEBUG_LOG(DEBUG_RS485, ("s1_ch1 restore min -= mid.\n"));
-						}
-						// 设置最大值
-						else if(is_true_16(p->item.sensor1_ch1_mid))
-						{
-							false_16(p->item.sensor1_ch1_mid);
-							p->item.sensor1_ch1_max += p->item.sensor1_ch1_mid;						
-							RT_DEBUG_LOG(DEBUG_RS485, ("s1_ch1 restore min += mid.\n"));
-						}
-					}
-				#endif
+				value_warn_flag = NORMAL;
 			}
-			else
-			{				
-				if(p->item.sensor1_ch1_cnt > 0)
+		#endif
+		
+		#if ( MIDDLE_VALUE > 0 )
+			// 设置
+			if(p->item.sensor1_ch1_mid > 0)
+			{
+				// 设置最小值
+				if(is_true_15(p->item.sensor1_ch1_mid))
 				{
-					p->item.sensor1_ch1_cnt --;
+					false_15(p->item.sensor1_ch1_mid);
+					p->item.sensor1_ch1_min -= p->item.sensor1_ch1_mid;
+					RT_DEBUG_LOG(DEBUG_RS485, ("s1_ch1 restore min -= mid.\n"));
+				}
+				// 设置最大值
+				else if(is_true_16(p->item.sensor1_ch1_mid))
+				{
+					false_16(p->item.sensor1_ch1_mid);
+					p->item.sensor1_ch1_max += p->item.sensor1_ch1_mid;						
+					RT_DEBUG_LOG(DEBUG_RS485, ("s1_ch1 restore min += mid.\n"));
 				}
 			}
-		#endif		
+		#endif				
 	}
 
 	// sensor1_ch2 小于最小值，大于最大值（溶氧度）
@@ -182,44 +176,36 @@ void warn_judge_value(Position p)
 	else
 	{
 		#if ( WARN_CNT > 0 )
-			if(p->item.sensor1_ch2_cnt ==  0)
+			p->item.sensor1_ch2_cnt = 0;
+		#endif
+
+		#if ( WARN_EN > 0 )
+			if(value_warn_flag == S1_C2)
 			{
-				#if ( WARN_EN > 0 )
-					if(value_warn_flag == S1_C2)
-					{
-						value_warn_flag = NORMAL;
-					}
-				#endif
-				
-				#if ( MIDDLE_VALUE > 0 )
-					// 设置
-					if(p->item.sensor1_ch2_mid > 0)
-					{
-						// 设置最小值
-						if(is_true_15(p->item.sensor1_ch2_mid))
-						{
-							false_15(p->item.sensor1_ch2_mid);
-							p->item.sensor1_ch2_min -= p->item.sensor1_ch2_mid;
-							RT_DEBUG_LOG(DEBUG_RS485, ("s1_ch2 restore min -= mid.\n"));
-						}
-						// 设置最大值
-						else if(is_true_16(p->item.sensor1_ch2_mid))
-						{
-							false_16(p->item.sensor1_ch2_mid);
-							p->item.sensor1_ch2_max += p->item.sensor1_ch2_mid;						
-							RT_DEBUG_LOG(DEBUG_RS485, ("s1_ch2 restore min += mid.\n"));
-						}
-					}
-				#endif
+				value_warn_flag = NORMAL;
 			}
-			else
-			{				
-				if(p->item.sensor1_ch2_cnt > 0)
+		#endif
+		
+		#if ( MIDDLE_VALUE > 0 )
+			// 设置
+			if(p->item.sensor1_ch2_mid > 0)
+			{
+				// 设置最小值
+				if(is_true_15(p->item.sensor1_ch2_mid))
 				{
-					p->item.sensor1_ch2_cnt --;
+					false_15(p->item.sensor1_ch2_mid);
+					p->item.sensor1_ch2_min -= p->item.sensor1_ch2_mid;
+					RT_DEBUG_LOG(DEBUG_RS485, ("s1_ch2 restore min -= mid.\n"));
+				}
+				// 设置最大值
+				else if(is_true_16(p->item.sensor1_ch2_mid))
+				{
+					false_16(p->item.sensor1_ch2_mid);
+					p->item.sensor1_ch2_max += p->item.sensor1_ch2_mid;						
+					RT_DEBUG_LOG(DEBUG_RS485, ("s1_ch2 restore min += mid.\n"));
 				}
 			}
-		#endif				
+		#endif						
 	}
 
 	// sensor2_ch1 小于最小值，大于最大值（PH）
@@ -271,44 +257,36 @@ void warn_judge_value(Position p)
 	else
 	{
 		#if ( WARN_CNT > 0 )
-			if(p->item.sensor2_ch1_cnt ==  0)
-			{				
-				#if ( WARN_EN > 0 )
-					if(value_warn_flag == S2_C1)
-					{
-						value_warn_flag = NORMAL;
-					}
-				#endif
-				
-				#if ( MIDDLE_VALUE > 0 )
-					// 设置
-					if(p->item.sensor2_ch1_mid > 0)
-					{
-						// 设置最小值
-						if(is_true_15(p->item.sensor2_ch1_mid))
-						{
-							false_15(p->item.sensor2_ch1_mid);
-							p->item.sensor2_ch1_min -= p->item.sensor2_ch1_mid;
-							RT_DEBUG_LOG(DEBUG_RS485, ("s2_ch1 restore min -= mid.\n"));
-						}
-						// 设置最大值
-						else if(is_true_16(p->item.sensor2_ch1_mid))
-						{
-							false_16(p->item.sensor2_ch1_mid);
-							p->item.sensor2_ch1_max += p->item.sensor2_ch1_mid;						
-							RT_DEBUG_LOG(DEBUG_RS485, ("s2_ch1 restore min += mid.\n"));
-						}
-					}
-				#endif
-			}	
-			else
-			{				
-				if(p->item.sensor2_ch1_cnt > 0)
+			p->item.sensor2_ch1_cnt = 0;
+		#endif
+						
+		#if ( WARN_EN > 0 )
+			if(value_warn_flag == S2_C1)
+			{
+				value_warn_flag = NORMAL;
+			}
+		#endif
+		
+		#if ( MIDDLE_VALUE > 0 )
+			// 设置
+			if(p->item.sensor2_ch1_mid > 0)
+			{
+				// 设置最小值
+				if(is_true_15(p->item.sensor2_ch1_mid))
 				{
-					p->item.sensor2_ch1_cnt --;
+					false_15(p->item.sensor2_ch1_mid);
+					p->item.sensor2_ch1_min -= p->item.sensor2_ch1_mid;
+					RT_DEBUG_LOG(DEBUG_RS485, ("s2_ch1 restore min -= mid.\n"));
+				}
+				// 设置最大值
+				else if(is_true_16(p->item.sensor2_ch1_mid))
+				{
+					false_16(p->item.sensor2_ch1_mid);
+					p->item.sensor2_ch1_max += p->item.sensor2_ch1_mid;						
+					RT_DEBUG_LOG(DEBUG_RS485, ("s2_ch1 restore min += mid.\n"));
 				}
 			}
-		#endif			
+		#endif	
 	}
 
 	// sensor2_ch2 小于最小值，大于最大值（温度）
@@ -360,44 +338,36 @@ void warn_judge_value(Position p)
 	else
 	{
 		#if ( WARN_CNT > 0 )
-			if(p->item.sensor2_ch2_cnt ==  0)
-			{						
-				#if ( WARN_EN > 0 )
-					if(value_warn_flag == S2_C2)
-					{
-						value_warn_flag = NORMAL;
-					}
-				#endif
-				
-				#if ( MIDDLE_VALUE > 0 )
-					// 设置
-					if(p->item.sensor2_ch2_mid > 0)
-					{
-						// 设置最小值
-						if(is_true_15(p->item.sensor2_ch2_mid))
-						{
-							false_15(p->item.sensor2_ch2_mid);
-							p->item.sensor2_ch2_min -= p->item.sensor2_ch2_mid;
-							RT_DEBUG_LOG(DEBUG_RS485, ("s2_ch2 restore min -= mid.\n"));
-						}
-						// 设置最大值
-						else if(is_true_16(p->item.sensor2_ch2_mid))
-						{
-							false_16(p->item.sensor2_ch2_mid);
-							p->item.sensor2_ch2_max += p->item.sensor2_ch2_mid;						
-							RT_DEBUG_LOG(DEBUG_RS485, ("s2_ch2 restore min += mid.\n"));
-						}
-					}
-				#endif
-			}	
-			else
-			{				
-				if(p->item.sensor2_ch2_cnt > 0)
+			p->item.sensor2_ch2_cnt = 0;
+		#endif
+						
+		#if ( WARN_EN > 0 )
+			if(value_warn_flag == S2_C2)
+			{
+				value_warn_flag = NORMAL;
+			}
+		#endif
+		
+		#if ( MIDDLE_VALUE > 0 )
+			// 设置
+			if(p->item.sensor2_ch2_mid > 0)
+			{
+				// 设置最小值
+				if(is_true_15(p->item.sensor2_ch2_mid))
 				{
-					p->item.sensor2_ch2_cnt --;
+					false_15(p->item.sensor2_ch2_mid);
+					p->item.sensor2_ch2_min -= p->item.sensor2_ch2_mid;
+					RT_DEBUG_LOG(DEBUG_RS485, ("s2_ch2 restore min -= mid.\n"));
+				}
+				// 设置最大值
+				else if(is_true_16(p->item.sensor2_ch2_mid))
+				{
+					false_16(p->item.sensor2_ch2_mid);
+					p->item.sensor2_ch2_max += p->item.sensor2_ch2_mid;						
+					RT_DEBUG_LOG(DEBUG_RS485, ("s2_ch2 restore min += mid.\n"));
 				}
 			}
-		#endif				
+		#endif						
 	}
 }
 
