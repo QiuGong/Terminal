@@ -1,6 +1,8 @@
 #include "warn.h"
 
 
+// 超时报警 
+
 /* BELL,LED 置位,开	*/
 #define TIME_OUT_SET	0x03000300 
 #define TIME_OUT_MAX	5

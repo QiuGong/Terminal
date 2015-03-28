@@ -1,5 +1,7 @@
 #include "warn.h"
 
+// ¶¨Ê±¿ØÖÆ
+
 
 #if ( WARN_TIMER > 0 )
 

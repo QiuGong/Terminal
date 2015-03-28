@@ -56,6 +56,10 @@ void _init_time_warn(void);
 void warn_judge_set(Position p, rt_uint32_t value, rt_uint8_t which);
 
 
+/*****************warn_rep.c*******************/
+void warn_rep(Position p);
+
+
 /*****************warn_judge_value.c*******************/
 void warn_judge_value(Position p);
 rt_uint8_t _get_value_warn_flag(void);
@@ -79,6 +83,8 @@ void warn_power_drop(void);
 
 
 /*****************warn_interface.c*******************/
+List _get_sensor(void);
+void _control_sensor(rt_uint8_t *id, enum X01_DEV dev, enum X01_CONTROL control);
 rt_uint16_t _get_system_hh_mm(void);
 rt_uint32_t _get_rs485_running(void);
 void warn_timer_start(void);

@@ -28,6 +28,7 @@ static void refresh_select_fun_to_flash(void)
 	/* ÌîÐ´Êý¾Ý */
 	buf[0] = '$';	len += 1;
 	len += positive(&(fun.warn_value), buf+len, 1);
+	len += positive(&(fun.warn_rep), buf+len, 1);
 	len += positive(&(fun.warn_timer), buf+len, 1);
 	len += positive(&(fun.warn_relate), buf+len, 1);
 	len += positive(&(fun.warn_time_out), buf+len, 1);
@@ -67,6 +68,7 @@ void read_select_fun_from_flash(void)
 		len += 1;
 
 		len += positive(buf+len, &(fun.warn_value), 1);
+		len += positive(buf+len, &(fun.warn_rep), 1);
 		len += positive(buf+len, &(fun.warn_timer), 1);
 		len += positive(buf+len, &(fun.warn_relate), 1);
 		len += positive(buf+len, &(fun.warn_time_out), 1);
@@ -90,6 +92,7 @@ static void list_define(void)
 	RT_DEBUG_LOG(WARN_LED, 		("WARN_LED \n"));
 	RT_DEBUG_LOG(WARN_BELL, 	("WARN_BELL \n"));	
 	RT_DEBUG_LOG(WARN_VALUE, 	("WARN_VALUE \n"));
+	RT_DEBUG_LOG(WARN_REP, 		("WARN_REP \n"));
 	RT_DEBUG_LOG(WARN_TIMER, 	("WARN_TIMER \n"));
 	RT_DEBUG_LOG(WARN_RELATE, 	("WARN_RELATE \n"));   
 	RT_DEBUG_LOG(WARN_TIME_OUT, ("WARN_TIME_OUT \n")); 
@@ -103,6 +106,16 @@ static void list_select_fun(void)
 {
 	RT_DEBUG_LOG(RS485_EN, ("warn value:"));
 	if(fun.warn_value == 1)
+	{
+		RT_DEBUG_LOG(RS485_EN, ("on \n"));
+	}
+	else
+	{
+		RT_DEBUG_LOG(RS485_EN, ("off \n"));
+	}
+
+	RT_DEBUG_LOG(RS485_EN, ("warn rep:"));
+	if(fun.warn_rep == 1)
 	{
 		RT_DEBUG_LOG(RS485_EN, ("on \n"));
 	}
@@ -172,6 +185,17 @@ static void select_fun(rt_uint8_t select, rt_uint8_t status)
 	{
 		if(status == 0)
 		{
+			fun.warn_rep = 0;
+		}
+		else if(status == 1)
+		{
+			fun.warn_rep = 1;
+		}
+	}
+	else if(select == 3)
+	{
+		if(status == 0)
+		{
 			fun.warn_timer = 0;
 		}
 		else if(status == 1)
@@ -179,7 +203,7 @@ static void select_fun(rt_uint8_t select, rt_uint8_t status)
 			fun.warn_timer = 1;
 		}
 	}
-	else if(select == 3)
+	else if(select == 4)
 	{
 		if(status == 0)
 		{
@@ -190,7 +214,7 @@ static void select_fun(rt_uint8_t select, rt_uint8_t status)
 			fun.warn_relate = 1;
 		}
 	}
-	else if(select == 4)
+	else if(select == 5)
 	{
 		if(status == 0)
 		{
@@ -201,7 +225,7 @@ static void select_fun(rt_uint8_t select, rt_uint8_t status)
 			fun.warn_time_out = 1;
 		}
 	}
-	else if(select == 5)
+	else if(select == 6)
 	{
 		if(status == 0)
 		{

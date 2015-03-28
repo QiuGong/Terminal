@@ -18,7 +18,7 @@ static void fill_request(rt_uint8_t *b, rt_uint8_t *id, rt_uint8_t cmd, rt_uint8
 }
 
 
-void x01_request(rt_uint8_t *id, enum X01_DEV dev, enum X01_CONTROL control)
+void _x01_request(rt_uint8_t *id, enum X01_DEV dev, enum X01_CONTROL control)
 {
     rt_uint8_t b[ALL_LEN];
 

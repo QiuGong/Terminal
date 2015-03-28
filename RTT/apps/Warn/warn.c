@@ -133,7 +133,7 @@ static void sensor_set(Position p)
 		{
 			if((p->item.k & (0x0001 << (LED - 1))) == OFF)
 			{
-				x01_request(p->item.id, LED, ON);
+				_control_sensor(p->item.id, LED, ON);
 				RT_DEBUG_LOG(DEBUG_WARN, ("LED ON.\n"));	
 			}
 		}
@@ -141,7 +141,7 @@ static void sensor_set(Position p)
 		{
 			if(p->item.k & (0x0001 << (LED - 1)))
 			{
-				x01_request(p->item.id, LED, OFF);
+				_control_sensor(p->item.id, LED, OFF);
 				RT_DEBUG_LOG(DEBUG_WARN, ("LED OFF.\n"));
 			}
 		}
@@ -163,7 +163,7 @@ static void sensor_set(Position p)
 		{
 			if((p->item.k & (0x0001 << (CH1 - 1))) == OFF)
 			{
-				x01_request(p->item.id, CH1, ON);
+				_control_sensor(p->item.id, CH1, ON);
 				RT_DEBUG_LOG(DEBUG_WARN, ("CH1 ON.\n"));	
 			}
 		}
@@ -171,7 +171,7 @@ static void sensor_set(Position p)
 		{
 			if(p->item.k & (0x0001 << (CH1 - 1)))
 			{
-				x01_request(p->item.id, CH1, OFF);
+				_control_sensor(p->item.id, CH1, OFF);
 				RT_DEBUG_LOG(DEBUG_WARN, ("CH1 OFF.\n"));
 			}
 		}
@@ -193,7 +193,7 @@ static void sensor_set(Position p)
 		{
 			if((p->item.k & (0x0001 << (T2 - 1))) == OFF)
 			{
-				x01_request(p->item.id, T2, ON);
+				_control_sensor(p->item.id, T2, ON);
 				RT_DEBUG_LOG(DEBUG_WARN, ("T2 ON.\n"));	
 			}
 		}
@@ -201,7 +201,7 @@ static void sensor_set(Position p)
 		{
 			if(p->item.k & (0x0001 << (T2 - 1)))
 			{
-				x01_request(p->item.id, T2, OFF);
+				_control_sensor(p->item.id, T2, OFF);
 				RT_DEBUG_LOG(DEBUG_WARN, ("T2 OFF.\n"));
 			}
 		}
@@ -223,7 +223,7 @@ static void sensor_set(Position p)
 		{
 			if((p->item.k & (0x0001 << (T3 - 1))) == OFF)
 			{
-				x01_request(p->item.id, T3, ON);
+				_control_sensor(p->item.id, T3, ON);
 				RT_DEBUG_LOG(DEBUG_WARN, ("T3 ON.\n"));	
 			}
 		}
@@ -231,7 +231,7 @@ static void sensor_set(Position p)
 		{
 			if(p->item.k & (0x0001 << (T3 - 1)))
 			{
-				x01_request(p->item.id, T3, OFF);
+				_control_sensor(p->item.id, T3, OFF);
 				RT_DEBUG_LOG(DEBUG_WARN, ("T3 OFF.\n"));
 			}
 		}
@@ -253,7 +253,7 @@ static void sensor_set(Position p)
 		{
 			if((p->item.k & (0x0001 << (M_A - 1))) == OFF)
 			{
-				x01_request(p->item.id, M_A, ON);
+				_control_sensor(p->item.id, M_A, ON);
 				RT_DEBUG_LOG(DEBUG_WARN, ("M_A ON.\n"));	
 			}
 		}
@@ -261,7 +261,7 @@ static void sensor_set(Position p)
 		{
 			if(p->item.k & (0x0001 << (M_A - 1)))
 			{
-				x01_request(p->item.id, M_A, OFF);
+				_control_sensor(p->item.id, M_A, OFF);
 				RT_DEBUG_LOG(DEBUG_WARN, ("M_A OFF.\n"));
 			}
 		}
@@ -283,7 +283,7 @@ static void sensor_set(Position p)
 		{
 			if((p->item.k & (0x0001 << (M_B - 1))) == OFF)
 			{
-				x01_request(p->item.id, M_B, ON);
+				_control_sensor(p->item.id, M_B, ON);
 				RT_DEBUG_LOG(DEBUG_WARN, ("M_B ON.\n"));	
 			}
 		}
@@ -291,7 +291,7 @@ static void sensor_set(Position p)
 		{
 			if(p->item.k & (0x0001 << (M_B - 1)))
 			{
-				x01_request(p->item.id, M_B, OFF);
+				_control_sensor(p->item.id, M_B, OFF);
 				RT_DEBUG_LOG(DEBUG_WARN, ("M_B OFF.\n"));
 			}
 		}
@@ -313,7 +313,7 @@ static void sensor_set(Position p)
 		{
 			if((p->item.k & (0x0001 << (M_C - 1))) == OFF)
 			{
-				x01_request(p->item.id, M_C, ON);
+				_control_sensor(p->item.id, M_C, ON);
 				RT_DEBUG_LOG(DEBUG_WARN, ("M_C ON.\n"));	
 			}
 		}
@@ -321,7 +321,7 @@ static void sensor_set(Position p)
 		{
 			if(p->item.k & (0x0001 << (M_C - 1)))
 			{
-				x01_request(p->item.id, M_C, OFF);
+				_control_sensor(p->item.id, M_C, OFF);
 				RT_DEBUG_LOG(DEBUG_WARN, ("M_C OFF.\n"));
 			}
 		}
@@ -395,35 +395,42 @@ static void control_set(void)
 
 static void warn_callBack(void *parameter)
 {
-	Position p = get_sensor_list();
+	Position p = _get_sensor();
 	while(p != RT_NULL)
 	{
 		#if ( WARN_TIMER > 0 )
-		if(_get_fun_enable().warn_timer == 1)
-		{
-			warn_judge_timer(p);
-		}
+			if(_get_fun_enable().warn_timer == 1)
+			{
+				warn_judge_timer(p);
+			}
+		#endif
+
+		#if ( WARN_REP > 0 )
+			if(_get_fun_enable().warn_rep == 1)
+			{
+				warn_rep(p);
+			}
 		#endif
 		
 		#if ( WARN_VALUE > 0 )
-		if(_get_fun_enable().warn_value == 1)
-		{
-			warn_judge_value(p);
-		}
+			if(_get_fun_enable().warn_value == 1)
+			{
+				warn_judge_value(p);
+			}
 		#endif
 
 		#if ( WARN_TIME_OUT > 0 )
-		if(_get_fun_enable().warn_time_out == 1)
-		{
-			warn_time_out(p);
-		}
+			if(_get_fun_enable().warn_time_out == 1)
+			{
+				warn_time_out(p);
+			}
 		#endif
 
 		#if ( WARN_RELATE > 0 )
-		if(_get_fun_enable().warn_relate == 1)
-		{
-			warn_relate(p);
-		}
+			if(_get_fun_enable().warn_relate == 1)
+			{
+				warn_relate(p);
+			}
 		#endif
 
 		sensor_set(p);		

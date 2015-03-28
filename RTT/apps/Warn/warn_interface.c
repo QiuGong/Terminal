@@ -5,6 +5,32 @@
 #if ( WARN_TIMER > 0 )
 
 /**
+ * 获取传感器列表
+ *
+ * @param 
+ *
+ * @return 
+ */
+List _get_sensor(void)
+{
+	return get_sensor_list();
+}
+
+
+/**
+ * 控制传感器
+ *
+ * @param 
+ *
+ * @return 
+ */
+void _control_sensor(rt_uint8_t *id, enum X01_DEV dev, enum X01_CONTROL control)
+{
+	control_sensor(id, dev, control);
+}
+
+
+/**
  * 获取系统时间（时分）
  *
  * @param 

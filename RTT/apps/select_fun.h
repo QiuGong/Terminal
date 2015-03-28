@@ -8,6 +8,7 @@
 typedef struct
 {
 	rt_uint8_t	warn_value;
+	rt_uint8_t	warn_rep;
 	rt_uint8_t	warn_timer;
 	rt_uint8_t	warn_relate;
 	rt_uint8_t	warn_time_out;

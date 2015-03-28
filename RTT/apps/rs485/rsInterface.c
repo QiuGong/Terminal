@@ -19,6 +19,19 @@ List get_sensor_list(void)
 
 
 /**
+ * 控制 Sensor
+ *
+ * @param 
+ *
+ * @return 
+ */
+void control_sensor(rt_uint8_t *id, enum X01_DEV dev, enum X01_CONTROL control)
+{
+	_x01_request(id, dev, control);
+}
+
+
+/**
  * RS485接收线程
  *
  * @param 
@@ -103,10 +116,14 @@ void print_sensor(Position p, rt_uint8_t *i)
 	RT_DEBUG_LOG(DEBUG_RS485, ("timer set:%04X \n", p->item.timer_set));
 	RT_DEBUG_LOG(DEBUG_RS485, ("last rec time:%d \n", p->item.last_rec_time));
 	RT_DEBUG_LOG(DEBUG_RS485, ("-------------------------------------------\n"));
-	RT_DEBUG_LOG(DEBUG_RS485, ("s1_c1-> val:%d, min:%d, max:%d, mid:%d, set:%08X, 电流:%d, 最小:%d, 最大:%d, 中间:%d \n", p->item.sensor1_ch1, p->item.sensor1_ch1_min, p->item.sensor1_ch1_max, p->item.sensor1_ch1_mid, p->item.sensor1_ch1_set, p->item.sensor1_ch1, 					p->item.sensor1_ch1_min, 					p->item.sensor1_ch1_max,				 p->item.sensor1_ch1_mid));
-	RT_DEBUG_LOG(DEBUG_RS485, ("s1_c2-> val:%d, min:%d, max:%d, mid:%d, set:%08X, 溶氧:%d, 最小:%d, 最大:%d, 中间:%d \n", p->item.sensor1_ch2, p->item.sensor1_ch2_min, p->item.sensor1_ch2_max, p->item.sensor1_ch2_mid, p->item.sensor1_ch2_set, formula_do_16(p->item.sensor1_ch2), 		formula_do_16(p->item.sensor1_ch2_min), 	formula_do_16(p->item.sensor1_ch2_max),	 formula_do_16(p->item.sensor1_ch2_mid)));
-	RT_DEBUG_LOG(DEBUG_RS485, ("s2_c1-> val:%d, min:%d, max:%d, mid:%d, set:%08X, 酸碱:%d, 最小:%d, 最大:%d, 中间:%d \n", p->item.sensor2_ch1, p->item.sensor2_ch1_min, p->item.sensor2_ch1_max, p->item.sensor2_ch1_mid, p->item.sensor2_ch1_set, formula_ph_16(p->item.sensor2_ch1), 		formula_ph_16(p->item.sensor2_ch1_min), 	formula_ph_16(p->item.sensor2_ch1_max),	 formula_ph_16(p->item.sensor2_ch1_mid)));
-	RT_DEBUG_LOG(DEBUG_RS485, ("s2_c2-> val:%d, min:%d, max:%d, mid:%d, set:%08X, 温度:%d, 最小:%d, 最大:%d, 中间:%d \n", p->item.sensor2_ch2, p->item.sensor2_ch2_min, p->item.sensor2_ch2_max, p->item.sensor2_ch2_mid, p->item.sensor2_ch2_set, formula_temp_16(p->item.sensor2_ch2), 	formula_temp_16(p->item.sensor2_ch2_min), 	formula_temp_16(p->item.sensor2_ch2_max),formula_temp_16(p->item.sensor2_ch2_mid)));	
+	RT_DEBUG_LOG(DEBUG_RS485, ("s1_c1-> val:%d, min:%d, max:%d, mid:%d, set:%08X, 电流:%d, 最小:%d, 最大:%d, 中间:%d \n", 
+								p->item.sensor1_ch1, p->item.sensor1_ch1_min, p->item.sensor1_ch1_max, p->item.sensor1_ch1_mid, p->item.sensor1_ch1_set, p->item.sensor1_ch1, 					p->item.sensor1_ch1_min, 					p->item.sensor1_ch1_max,				 p->item.sensor1_ch1_mid));
+	RT_DEBUG_LOG(DEBUG_RS485, ("s1_c2-> val:%d, min:%d, max:%d, mid:%d, set:%08X, 溶氧:%d, 最小:%d, 最大:%d, 中间:%d \n", 
+								p->item.sensor1_ch2, p->item.sensor1_ch2_min, p->item.sensor1_ch2_max, p->item.sensor1_ch2_mid, p->item.sensor1_ch2_set, formula_do_16(p->item.sensor1_ch2), 		formula_do_16(p->item.sensor1_ch2_min), 	formula_do_16(p->item.sensor1_ch2_max),	 formula_do_16(p->item.sensor1_ch2_mid)));
+	RT_DEBUG_LOG(DEBUG_RS485, ("s2_c1-> val:%d, min:%d, max:%d, mid:%d, set:%08X, 酸碱:%d, 最小:%d, 最大:%d, 中间:%d \n", 
+								p->item.sensor2_ch1, p->item.sensor2_ch1_min, p->item.sensor2_ch1_max, p->item.sensor2_ch1_mid, p->item.sensor2_ch1_set, formula_ph_16(p->item.sensor2_ch1), 		formula_ph_16(p->item.sensor2_ch1_min), 	formula_ph_16(p->item.sensor2_ch1_max),	 formula_ph_16(p->item.sensor2_ch1_mid)));
+	RT_DEBUG_LOG(DEBUG_RS485, ("s2_c2-> val:%d, min:%d, max:%d, mid:%d, set:%08X, 温度:%d, 最小:%d, 最大:%d, 中间:%d \n", 
+								p->item.sensor2_ch2, p->item.sensor2_ch2_min, p->item.sensor2_ch2_max, p->item.sensor2_ch2_mid, p->item.sensor2_ch2_set, formula_temp_16(p->item.sensor2_ch2), 	formula_temp_16(p->item.sensor2_ch2_min), 	formula_temp_16(p->item.sensor2_ch2_max),formula_temp_16(p->item.sensor2_ch2_mid)));	
 	RT_DEBUG_LOG(DEBUG_RS485, ("-------------------------------------------\n"));
 	RT_DEBUG_LOG(DEBUG_RS485, ("t1-> start:%04X,  end:%04X, set:%08X.\n", p->item.time1_start,  p->item.time1_end,  p->item.time1_set));
 	RT_DEBUG_LOG(DEBUG_RS485, ("t2-> start:%04X,  end:%04X, set:%08X.\n", p->item.time2_start,  p->item.time2_end,  p->item.time2_set));

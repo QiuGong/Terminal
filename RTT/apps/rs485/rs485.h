@@ -71,7 +71,7 @@ enum X01_CONTROL{ ON = 0x01, OFF = 0x00};
 #define SENSOR_2    			0x03
 
 // 判断组数,每组长度
-#define SENSOR_JUDGE_NUM		0x04 * 3
+#define SENSOR_JUDGE_NUM		0x04 * 4
 #define SENSOR_PER_LEN			0x02
 
 // 超值控制值，超值控制值长度
@@ -113,7 +113,7 @@ void re485_send(rt_uint8_t *b, rt_uint8_t len);
 
 
 /*****************rsRequest.c*******************/
-void x01_request(rt_uint8_t *id, enum X01_DEV dev, enum X01_CONTROL control);
+void _x01_request(rt_uint8_t *id, enum X01_DEV dev, enum X01_CONTROL control);
 rt_uint32_t _get_rs485_time(void);
 void rs485_send_thread_entry(void *parameter);
 
@@ -175,31 +175,35 @@ typedef struct ELEMENT
 
 	// 传感器值，最小，最大，控制标志
 	rt_uint16_t	sensor1_ch1;// 电流
-	rt_uint16_t	sensor1_ch1_min;// 最大值
-	rt_uint16_t	sensor1_ch1_max;// 最小值
-    rt_uint8_t	sensor1_ch1_cnt;// 警报次数
-	rt_uint16_t	sensor1_ch1_mid;// 中间值
+	rt_uint16_t	sensor1_ch1_cnt;// 警报次数
+	rt_uint16_t	sensor1_ch1_min;// 最小值
+	rt_uint16_t	sensor1_ch1_max;// 最大值
+	rt_uint16_t	sensor1_ch1_mid;// 中间值 	
+	rt_uint16_t sensor1_ch1_rep;// 更换设值
 	rt_uint32_t sensor1_ch1_set;// 设置
 
 	rt_uint16_t	sensor1_ch2;// 溶氧度
+	rt_uint16_t	sensor1_ch2_cnt;
 	rt_uint16_t	sensor1_ch2_min;
 	rt_uint16_t	sensor1_ch2_max;
-	rt_uint8_t	sensor1_ch2_cnt;
-	rt_uint16_t	sensor1_ch2_mid;
+	rt_uint16_t	sensor1_ch2_mid;		
+	rt_uint16_t sensor1_ch2_rep;
 	rt_uint32_t sensor1_ch2_set;
 
 	rt_uint16_t	sensor2_ch1;// PH
+	rt_uint16_t	sensor2_ch1_cnt;
 	rt_uint16_t	sensor2_ch1_min;
 	rt_uint16_t	sensor2_ch1_max;
-	rt_uint8_t	sensor2_ch1_cnt;
-	rt_uint16_t	sensor2_ch1_mid;
+	rt_uint16_t	sensor2_ch1_mid;		
+	rt_uint16_t sensor2_ch1_rep;
 	rt_uint32_t sensor2_ch1_set;
 
 	rt_uint16_t	sensor2_ch2;// 温度
+	rt_uint16_t	sensor2_ch2_cnt;
 	rt_uint16_t	sensor2_ch2_min;
 	rt_uint16_t	sensor2_ch2_max;
-	rt_uint8_t	sensor2_ch2_cnt;
-	rt_uint16_t	sensor2_ch2_mid;
+	rt_uint16_t	sensor2_ch2_mid;		
+	rt_uint16_t sensor2_ch2_rep;
 	rt_uint32_t	sensor2_ch2_set;
 
 	
@@ -308,7 +312,8 @@ unsigned char Length(List L);
 
 /*****************rsInterface.c*******************/
 List get_sensor_list(void);
-List _get_sensor_list(void);
+List _get_sensor_list(void);//(不能上移)
+void control_sensor(rt_uint8_t *id, enum X01_DEV dev, enum X01_CONTROL control);
 void rs485_rec_thread_entry(void* parameter);
 rt_uint32_t get_rs485_time(void);
 rt_uint16_t get_max_len(void);

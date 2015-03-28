@@ -42,6 +42,7 @@
 #define  WARN_LED			1
 #define  WARN_BELL			1
 #define  WARN_VALUE			1
+#define  WARN_REP			1
 #define  WARN_TIMER			1
 #define  WARN_RELATE		1
 #define  WARN_TIME_OUT		1
@@ -51,6 +52,7 @@
 #define  WARN_LED			0
 #define  WARN_BELL			0
 #define  WARN_VALUE			0
+#define  WARN_REP			0
 #define  WARN_TIMER			0
 #define  WARN_RELATE		0
 #define  WARN_TIME_OUT		0

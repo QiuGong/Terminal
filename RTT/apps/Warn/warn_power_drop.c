@@ -1,6 +1,8 @@
 #include "warn.h"
 
 
+// 掉电报警
+
 #if ( WARN_POWER_DROP > 0 )
 
 /* BELL,LED 置位,开	*/
