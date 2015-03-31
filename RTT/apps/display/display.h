@@ -87,7 +87,7 @@ void x07_dsp_respond(rt_uint8_t *b);
 void x08_dsp_respond(rt_uint8_t *b);
 
 
-/*****************convert.c*******************/
+/*****************dspInterface.c*******************/
 rt_uint8_t _get_warn_flag(void);
 void display_rec_thread_entry(void* parameter);
 void _get_UTC8_time(rt_uint8_t *buf);
