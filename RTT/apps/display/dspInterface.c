@@ -281,67 +281,67 @@ void _get_time_value(rt_uint8_t which)
 	{	
 		if((++i) == which)
 		{
-			x07_dsp_request(0x01, bcd8_to_hex8(p->item.time1_start>>8), bcd8_to_hex8(p->item.time1_start), 
+			x07_dsp_request(1, bcd8_to_hex8(p->item.time1_start>>8), bcd8_to_hex8(p->item.time1_start), 
 								  bcd8_to_hex8(p->item.time1_end>>8), bcd8_to_hex8(p->item.time1_end));				
 			rt_thread_delay(30);
 
-			x07_dsp_request(0x02, bcd8_to_hex8(p->item.time2_start>>8), bcd8_to_hex8(p->item.time2_start), 
+			x07_dsp_request(2, bcd8_to_hex8(p->item.time2_start>>8), bcd8_to_hex8(p->item.time2_start), 
 								  bcd8_to_hex8(p->item.time2_end>>8), bcd8_to_hex8(p->item.time2_end));				
 			rt_thread_delay(30);
 
-			x07_dsp_request(0x03, bcd8_to_hex8(p->item.time3_start>>8), bcd8_to_hex8(p->item.time3_start), 
+			x07_dsp_request(3, bcd8_to_hex8(p->item.time3_start>>8), bcd8_to_hex8(p->item.time3_start), 
 								  bcd8_to_hex8(p->item.time3_end>>8), bcd8_to_hex8(p->item.time3_end));				
 			rt_thread_delay(30);
 
-			x07_dsp_request(0x04, bcd8_to_hex8(p->item.time4_start>>8), bcd8_to_hex8(p->item.time4_start), 
+			x07_dsp_request(4, bcd8_to_hex8(p->item.time4_start>>8), bcd8_to_hex8(p->item.time4_start), 
 								  bcd8_to_hex8(p->item.time4_end>>8), bcd8_to_hex8(p->item.time4_end));				
 			rt_thread_delay(30);
 
-			x07_dsp_request(0x05, bcd8_to_hex8(p->item.time5_start>>8), bcd8_to_hex8(p->item.time5_start), 
+			x07_dsp_request(5, bcd8_to_hex8(p->item.time5_start>>8), bcd8_to_hex8(p->item.time5_start), 
 								  bcd8_to_hex8(p->item.time5_end>>8), bcd8_to_hex8(p->item.time5_end));				
 			rt_thread_delay(30);
 
-			x07_dsp_request(0x06, bcd8_to_hex8(p->item.time6_start>>8), bcd8_to_hex8(p->item.time6_start), 
+			x07_dsp_request(6, bcd8_to_hex8(p->item.time6_start>>8), bcd8_to_hex8(p->item.time6_start), 
 								  bcd8_to_hex8(p->item.time6_end>>8), bcd8_to_hex8(p->item.time6_end));				
 			rt_thread_delay(30);
 
-			x07_dsp_request(0x07, bcd8_to_hex8(p->item.time7_start>>8), bcd8_to_hex8(p->item.time7_start), 
+			x07_dsp_request(7, bcd8_to_hex8(p->item.time7_start>>8), bcd8_to_hex8(p->item.time7_start), 
 								  bcd8_to_hex8(p->item.time7_end>>8), bcd8_to_hex8(p->item.time7_end));				
 			rt_thread_delay(30);
 
- 			x07_dsp_request(0x08, bcd8_to_hex8(p->item.time8_start>>8), bcd8_to_hex8(p->item.time8_start), 
+ 			x07_dsp_request(8, bcd8_to_hex8(p->item.time8_start>>8), bcd8_to_hex8(p->item.time8_start), 
 								  bcd8_to_hex8(p->item.time8_end>>8), bcd8_to_hex8(p->item.time8_end));				
 			rt_thread_delay(30);
 
-			x07_dsp_request(0x09, bcd8_to_hex8(p->item.time9_start>>8), bcd8_to_hex8(p->item.time9_start), 
+			x07_dsp_request(9, bcd8_to_hex8(p->item.time9_start>>8), bcd8_to_hex8(p->item.time9_start), 
 								  bcd8_to_hex8(p->item.time9_end>>8), bcd8_to_hex8(p->item.time9_end));				
 			rt_thread_delay(30);
 
-			x07_dsp_request(0x10, bcd8_to_hex8(p->item.time10_start>>8), bcd8_to_hex8(p->item.time10_start), 
+			x07_dsp_request(10, bcd8_to_hex8(p->item.time10_start>>8), bcd8_to_hex8(p->item.time10_start), 
 								  bcd8_to_hex8(p->item.time10_end>>8), bcd8_to_hex8(p->item.time10_end));				
 			rt_thread_delay(30);
 
-			x07_dsp_request(0x11, bcd8_to_hex8(p->item.time11_start>>8), bcd8_to_hex8(p->item.time11_start), 
+			x07_dsp_request(11, bcd8_to_hex8(p->item.time11_start>>8), bcd8_to_hex8(p->item.time11_start), 
 								  bcd8_to_hex8(p->item.time11_end>>8), bcd8_to_hex8(p->item.time11_end));				
 			rt_thread_delay(30);
 
-			x07_dsp_request(0x12, bcd8_to_hex8(p->item.time12_start>>8), bcd8_to_hex8(p->item.time12_start), 
+			x07_dsp_request(12, bcd8_to_hex8(p->item.time12_start>>8), bcd8_to_hex8(p->item.time12_start), 
 								  bcd8_to_hex8(p->item.time12_end>>8), bcd8_to_hex8(p->item.time12_end));				
 			rt_thread_delay(30);
 
-			x07_dsp_request(0x13, bcd8_to_hex8(p->item.time13_start>>8), bcd8_to_hex8(p->item.time13_start), 
+			x07_dsp_request(13, bcd8_to_hex8(p->item.time13_start>>8), bcd8_to_hex8(p->item.time13_start), 
 								  bcd8_to_hex8(p->item.time13_end>>8), bcd8_to_hex8(p->item.time13_end));				
 			rt_thread_delay(30);
 
-			x07_dsp_request(0x14, bcd8_to_hex8(p->item.time14_start>>8), bcd8_to_hex8(p->item.time14_start), 
+			x07_dsp_request(14, bcd8_to_hex8(p->item.time14_start>>8), bcd8_to_hex8(p->item.time14_start), 
 								  bcd8_to_hex8(p->item.time14_end>>8), bcd8_to_hex8(p->item.time14_end));				
 			rt_thread_delay(30);
 
- 			x07_dsp_request(0x15, bcd8_to_hex8(p->item.time15_start>>8), bcd8_to_hex8(p->item.time15_start), 
+ 			x07_dsp_request(15, bcd8_to_hex8(p->item.time15_start>>8), bcd8_to_hex8(p->item.time15_start), 
 								  bcd8_to_hex8(p->item.time15_end>>8), bcd8_to_hex8(p->item.time15_end));				
 			rt_thread_delay(30);
 
-			x07_dsp_request(0x16, bcd8_to_hex8(p->item.time16_start>>8), bcd8_to_hex8(p->item.time16_start), 
+			x07_dsp_request(16, bcd8_to_hex8(p->item.time16_start>>8), bcd8_to_hex8(p->item.time16_start), 
 								  bcd8_to_hex8(p->item.time16_end>>8), bcd8_to_hex8(p->item.time16_end));				
 			rt_thread_delay(30);
 		}
