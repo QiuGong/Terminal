@@ -21,6 +21,12 @@ rt_uint8_t _get_timeout_warn_flag(void)
 }
 
 
+void _set_timeout_warn_flag(rt_uint8_t value)
+{
+	timeout_warn_flag  = value;
+}
+
+
 void warn_time_out(Position p)
 {
 	rt_uint32_t	t = _get_rs485_running();

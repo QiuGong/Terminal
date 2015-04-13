@@ -96,6 +96,19 @@ rt_uint8_t get_value_warn_flag(void)
 
 
 /**
+ * 设置阈值报警
+ *
+ * @param 
+ *
+ * @return 
+ */
+void set_value_warn_flag(rt_uint8_t value)
+{
+	_set_value_warn_flag(value);
+}
+
+
+/**
  * 获取超时报警
  *
  * @param 
@@ -105,6 +118,19 @@ rt_uint8_t get_value_warn_flag(void)
 rt_uint8_t get_timeout_warn_flag(void)
 {
 	return 	_get_timeout_warn_flag();
+}
+
+
+/**
+ * 设置超时报警
+ *
+ * @param 
+ *
+ * @return 
+ */
+void set_timeout_warn_flag(rt_uint8_t value)
+{
+	_set_timeout_warn_flag(value);
 }
 
 #endif

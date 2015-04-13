@@ -9,7 +9,7 @@
 
 static void refresh_backup_to_flash(void)
 {
-	rt_uint8_t len = 0;
+	rt_uint16_t len = 0;
 	rt_uint8_t *buf = RT_NULL;
 								    
 	
@@ -38,7 +38,7 @@ static void refresh_backup_to_flash(void)
 
 static void read_backup_from_flash(void)
 {
-	rt_uint8_t len = 0;
+	rt_uint16_t len = 0;
 	rt_uint8_t *buf = RT_NULL;
 
 	
@@ -66,7 +66,7 @@ static void read_backup_from_flash(void)
 
 static void get_backup_status(void)
 {	
-	rt_uint8_t len = 0;
+	rt_uint16_t len = 0;
 	rt_uint8_t *buf = RT_NULL;
 
 	

@@ -38,7 +38,7 @@ rt_uint8_t _get_warn_flag(void)
 	else if(get_value_warn_flag() == 4)
 	{
 		flag = U_TEMP;
-	}
+	}	
 
 	return flag;	
 }
@@ -105,7 +105,7 @@ void _get_sensor_value(void)
 		rt_uint16_t temp = 0, ph = 0, Do = 0;	
 
 		i++;				
-		if((p->item.sensor2_ch2 != 0) || (p->item.sensor2_ch1 != 0) || (p->item.sensor1_ch2 != 0))
+		if(p->item.is_show == 0)
 		{
 			// 公式计算
 			temp = formula_temp_16(p->item.sensor2_ch2);
@@ -170,7 +170,6 @@ void _get_query_sensor_cnt(void)
  */
 void _get_query_sensor_value(rt_uint8_t which)
 {
-// 关联未做？？？？？？
 #if ( RS485_EN > 0 )
 	Position p = get_sensor_list();
 	rt_uint8_t i = 0;
@@ -182,7 +181,7 @@ void _get_query_sensor_value(rt_uint8_t which)
 			x04_dsp_request (formula_temp_16(p->item.sensor2_ch2_min), 		formula_temp_16(p->item.sensor2_ch2_max), 
 					 		(formula_ph_16(p->item.sensor2_ch1_min)/10),	(formula_ph_16(p->item.sensor2_ch1_max)/10), 
 					 		(formula_do_16(p->item.sensor1_ch2_min)/10), 	(formula_do_16(p->item.sensor1_ch2_max)/10), 
-					 		0);		
+					 		p->item.s1c2_set_backup == 0 ? 0 : 1);		
 		}
 
 		p = p->next;
@@ -205,7 +204,6 @@ void _get_query_sensor_value(rt_uint8_t which)
  */
 void _set_query_sensor_value(rt_uint8_t *b)
 {
-// 关联未做？？？？？？
 #if ( RS485_EN > 0 )
 	Position p = get_sensor_list();
 	rt_uint8_t i = 0;
@@ -220,7 +218,7 @@ void _set_query_sensor_value(rt_uint8_t *b)
 			p->item.sensor2_ch1_max	= formula_ph_8(b[4]); 
 			p->item.sensor1_ch2_min	= formula_do_8(b[5]); 
 			p->item.sensor1_ch2_max	= formula_do_8(b[6]); 
-			b[7]					= b[7];  
+			set_backup(p, 2, b[7]); 
 		}
 		p = p->next;
 	}

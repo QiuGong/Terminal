@@ -48,6 +48,12 @@ rt_uint8_t _get_value_warn_flag(void)
 }
 
 
+void _set_value_warn_flag(rt_uint8_t value)
+{
+	value_warn_flag = value;
+}
+
+
 void warn_judge_value(Position p)
 {
 	// sensor1_ch1 小于最小值，大于最大值（电流）

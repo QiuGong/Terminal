@@ -2,6 +2,15 @@
 
 #if ( RS485_EN > 0 )
 
+
+/* EN485(PA0) */
+#define EN_RS485_RCC        	RCC_APB2Periph_GPIOA
+#define EN_RS485_GPIO       	GPIOA
+#define EN_RS485_PIN        	(GPIO_Pin_0)
+#define EN_RS485_DISABLE 		GPIO_SetBits(EN_RS485_GPIO, EN_RS485_PIN);
+#define EN_RS485_ENABLE 		GPIO_ResetBits(EN_RS485_GPIO, EN_RS485_PIN);
+
+
 /* 用于接收消息的消息队列*/
 static struct rt_messagequeue rx_mq;
 static rt_uint8_t msg_pool[ALL_LEN * MAX_MQ];

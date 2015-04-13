@@ -100,98 +100,107 @@ void refresh_sensor_to_flash(void)
 	buf[0] = '$';	len += 2;
 	while(p != RT_NULL)
 	{
+		// ID
 		len += positive(p->item.id, buf+len, ID_LEN);
 
-		// 传感器最大最小值
-		len += negative((rt_uint8_t *)&(p->item.sensor1_ch1_min), buf+len, SENSOR_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.sensor1_ch1_max), buf+len, SENSOR_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.sensor1_ch1_mid), buf+len, SENSOR_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.sensor1_ch1_rep), buf+len, SENSOR_PER_LEN);
+		// IS_SHOW
+		len += positive((rt_uint8_t *)&(p->item.is_show), buf+len, IS_SHOW_LEN);
+
+		// 传感器
+		len += negative((rt_uint8_t *)&(p->item.sensor1_ch1_min), buf+len, SENSOR_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor1_ch1_max), buf+len, SENSOR_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor1_ch1_mid), buf+len, SENSOR_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor1_ch1_rep), buf+len, SENSOR_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.sensor1_ch1_set), buf+len, SENSOR_SET_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.s1c1_set_backup), buf+len, SENSOR_SET_PER_LEN);
 
-		len += negative((rt_uint8_t *)&(p->item.sensor1_ch2_min), buf+len, SENSOR_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.sensor1_ch2_max), buf+len, SENSOR_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.sensor1_ch2_mid), buf+len, SENSOR_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.sensor1_ch2_rep), buf+len, SENSOR_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor1_ch2_min), buf+len, SENSOR_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor1_ch2_max), buf+len, SENSOR_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor1_ch2_mid), buf+len, SENSOR_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor1_ch2_rep), buf+len, SENSOR_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.sensor1_ch2_set), buf+len, SENSOR_SET_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.s1c2_set_backup), buf+len, SENSOR_SET_PER_LEN);
 
-		len += negative((rt_uint8_t *)&(p->item.sensor2_ch1_min), buf+len, SENSOR_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.sensor2_ch1_max), buf+len, SENSOR_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.sensor2_ch1_mid), buf+len, SENSOR_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.sensor2_ch1_rep), buf+len, SENSOR_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor2_ch1_min), buf+len, SENSOR_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor2_ch1_max), buf+len, SENSOR_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor2_ch1_mid), buf+len, SENSOR_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor2_ch1_rep), buf+len, SENSOR_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.sensor2_ch1_set), buf+len, SENSOR_SET_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.s2c1_set_backup), buf+len, SENSOR_SET_PER_LEN);
 
-		len += negative((rt_uint8_t *)&(p->item.sensor2_ch2_min), buf+len, SENSOR_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.sensor2_ch2_max), buf+len, SENSOR_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.sensor2_ch2_mid), buf+len, SENSOR_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.sensor2_ch2_rep), buf+len, SENSOR_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor2_ch2_min), buf+len, SENSOR_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor2_ch2_max), buf+len, SENSOR_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor2_ch2_mid), buf+len, SENSOR_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.sensor2_ch2_rep), buf+len, SENSOR_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.sensor2_ch2_set), buf+len, SENSOR_SET_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.s2c2_set_backup), buf+len, SENSOR_SET_PER_LEN);
 
-		// 时间开始结束
-		len += negative((rt_uint8_t *)&(p->item.time1_start), 	  buf+len, TIME_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.time1_end), 	  buf+len, TIME_PER_LEN);
+		// 定时器
+		len += negative((rt_uint8_t *)&(p->item.time1_start), 	  buf+len, TIME_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time1_end), 	  buf+len, TIME_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.time1_set), 	  buf+len, TIME_SET_PER_LEN);
 
-		len += negative((rt_uint8_t *)&(p->item.time2_start), 	  buf+len, TIME_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.time2_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time2_start), 	  buf+len, TIME_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time2_end), 	  buf+len, TIME_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.time2_set), 	  buf+len, TIME_SET_PER_LEN);
 
-		len += negative((rt_uint8_t *)&(p->item.time3_start), 	  buf+len, TIME_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.time3_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time3_start), 	  buf+len, TIME_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time3_end), 	  buf+len, TIME_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.time3_set), 	  buf+len, TIME_SET_PER_LEN);
 
-		len += negative((rt_uint8_t *)&(p->item.time4_start), 	  buf+len, TIME_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.time4_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time4_start), 	  buf+len, TIME_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time4_end), 	  buf+len, TIME_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.time4_set), 	  buf+len, TIME_SET_PER_LEN);
 
-		len += negative((rt_uint8_t *)&(p->item.time5_start), 	  buf+len, TIME_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.time5_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time5_start), 	  buf+len, TIME_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time5_end), 	  buf+len, TIME_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.time5_set), 	  buf+len, TIME_SET_PER_LEN);
 
-		len += negative((rt_uint8_t *)&(p->item.time6_start), 	  buf+len, TIME_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.time6_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time6_start), 	  buf+len, TIME_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time6_end), 	  buf+len, TIME_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.time6_set), 	  buf+len, TIME_SET_PER_LEN);
 
-		len += negative((rt_uint8_t *)&(p->item.time7_start), 	  buf+len, TIME_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.time7_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time7_start), 	  buf+len, TIME_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time7_end), 	  buf+len, TIME_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.time7_set), 	  buf+len, TIME_SET_PER_LEN);
 
-		len += negative((rt_uint8_t *)&(p->item.time8_start), 	  buf+len, TIME_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.time8_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time8_start), 	  buf+len, TIME_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time8_end), 	  buf+len, TIME_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.time8_set), 	  buf+len, TIME_SET_PER_LEN);
 
-		len += negative((rt_uint8_t *)&(p->item.time9_start), 	  buf+len, TIME_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.time9_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time9_start), 	  buf+len, TIME_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time9_end), 	  buf+len, TIME_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.time9_set), 	  buf+len, TIME_SET_PER_LEN);
 
-		len += negative((rt_uint8_t *)&(p->item.time10_start), 	  buf+len, TIME_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.time10_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time10_start), 	  buf+len, TIME_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time10_end), 	  buf+len, TIME_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.time10_set), 	  buf+len, TIME_SET_PER_LEN);
 
-		len += negative((rt_uint8_t *)&(p->item.time11_start), 	  buf+len, TIME_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.time11_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time11_start), 	  buf+len, TIME_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time11_end), 	  buf+len, TIME_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.time11_set), 	  buf+len, TIME_SET_PER_LEN);
 
-		len += negative((rt_uint8_t *)&(p->item.time12_start), 	  buf+len, TIME_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.time12_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time12_start), 	  buf+len, TIME_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time12_end), 	  buf+len, TIME_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.time12_set), 	  buf+len, TIME_SET_PER_LEN);
 
-		len += negative((rt_uint8_t *)&(p->item.time13_start), 	  buf+len, TIME_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.time13_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time13_start), 	  buf+len, TIME_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time13_end), 	  buf+len, TIME_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.time13_set), 	  buf+len, TIME_SET_PER_LEN);
 
-		len += negative((rt_uint8_t *)&(p->item.time14_start), 	  buf+len, TIME_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.time14_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time14_start), 	  buf+len, TIME_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time14_end), 	  buf+len, TIME_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.time14_set), 	  buf+len, TIME_SET_PER_LEN);
 
-		len += negative((rt_uint8_t *)&(p->item.time15_start), 	  buf+len, TIME_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.time15_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time15_start), 	  buf+len, TIME_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time15_end), 	  buf+len, TIME_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.time15_set), 	  buf+len, TIME_SET_PER_LEN);
 
-		len += negative((rt_uint8_t *)&(p->item.time16_start), 	  buf+len, TIME_PER_LEN);
-		len += negative((rt_uint8_t *)&(p->item.time16_end), 	  buf+len, TIME_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time16_start), 	  buf+len, TIME_JUDGE_PER_LEN);
+		len += negative((rt_uint8_t *)&(p->item.time16_end), 	  buf+len, TIME_JUDGE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.time16_set), 	  buf+len, TIME_SET_PER_LEN);
 
+		// 关联控制
 		len += negative((rt_uint8_t *)&(p->item.k1_relate), 	  buf+len, K_RELATE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.k2_relate), 	  buf+len, K_RELATE_PER_LEN);
 		len += negative((rt_uint8_t *)&(p->item.k3_relate), 	  buf+len, K_RELATE_PER_LEN);
@@ -237,96 +246,104 @@ void read_sensor_from_flash(void)
 			p = Find(buf + len, sensor);
 			len += ID_LEN;
 
-			// 传感器最大最小值
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch1_min), SENSOR_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch1_max), SENSOR_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch1_mid), SENSOR_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch1_rep), SENSOR_PER_LEN);
+			// 是否显示
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.is_show), IS_SHOW_LEN);
+
+			// 传感器
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch1_min), SENSOR_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch1_max), SENSOR_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch1_mid), SENSOR_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch1_rep), SENSOR_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch1_set), SENSOR_SET_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.s1c1_set_backup), SENSOR_SET_PER_LEN);
 	
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch2_min), SENSOR_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch2_max), SENSOR_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch2_mid), SENSOR_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch2_rep), SENSOR_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch2_min), SENSOR_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch2_max), SENSOR_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch2_mid), SENSOR_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch2_rep), SENSOR_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor1_ch2_set), SENSOR_SET_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.s1c2_set_backup), SENSOR_SET_PER_LEN);
 	
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch1_min), SENSOR_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch1_max), SENSOR_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch1_mid), SENSOR_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch1_rep), SENSOR_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch1_min), SENSOR_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch1_max), SENSOR_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch1_mid), SENSOR_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch1_rep), SENSOR_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch1_set), SENSOR_SET_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.s2c1_set_backup), SENSOR_SET_PER_LEN);
 	
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch2_min), SENSOR_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch2_max), SENSOR_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch2_mid), SENSOR_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch2_rep), SENSOR_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch2_min), SENSOR_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch2_max), SENSOR_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch2_mid), SENSOR_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch2_rep), SENSOR_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.sensor2_ch2_set), SENSOR_SET_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.s2c2_set_backup), SENSOR_SET_PER_LEN);
 	
-			// 时间开始,结束,设置
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time1_start), 	TIME_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time1_end), 	TIME_PER_LEN);
+			// 定时器
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time1_start), 	TIME_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time1_end), 	TIME_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time1_set), 	TIME_SET_PER_LEN);
 	
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time2_start), 	TIME_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time2_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time2_start), 	TIME_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time2_end), 	TIME_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time2_set), 	TIME_SET_PER_LEN);
 	
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time3_start), 	TIME_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time3_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time3_start), 	TIME_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time3_end), 	TIME_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time3_set), 	TIME_SET_PER_LEN);
 	
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time4_start), 	TIME_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time4_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time4_start), 	TIME_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time4_end), 	TIME_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time4_set), 	TIME_SET_PER_LEN);
 	
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time5_start), 	TIME_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time5_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time5_start), 	TIME_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time5_end), 	TIME_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time5_set), 	TIME_SET_PER_LEN);
 	
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time6_start), 	TIME_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time6_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time6_start), 	TIME_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time6_end), 	TIME_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time6_set), 	TIME_SET_PER_LEN);
 	
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time7_start), 	TIME_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time7_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time7_start), 	TIME_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time7_end), 	TIME_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time7_set), 	TIME_SET_PER_LEN);
 	
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time8_start), 	TIME_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time8_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time8_start), 	TIME_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time8_end), 	TIME_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time8_set), 	TIME_SET_PER_LEN);
 	
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time9_start), 	TIME_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time9_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time9_start), 	TIME_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time9_end), 	TIME_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time9_set), 	TIME_SET_PER_LEN);
 	
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time10_start), TIME_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time10_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time10_start), TIME_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time10_end), 	TIME_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time10_set), 	TIME_SET_PER_LEN);
 	
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time11_start), TIME_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time11_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time11_start), TIME_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time11_end), 	TIME_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time11_set), 	TIME_SET_PER_LEN);
 	
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time12_start), TIME_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time12_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time12_start), TIME_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time12_end), 	TIME_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time12_set), 	TIME_SET_PER_LEN);
 	
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time13_start), TIME_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time13_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time13_start), TIME_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time13_end), 	TIME_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time13_set), 	TIME_SET_PER_LEN);
 	
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time14_start), TIME_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time14_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time14_start), TIME_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time14_end), 	TIME_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time14_set), 	TIME_SET_PER_LEN);
 	
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time15_start), TIME_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time15_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time15_start), TIME_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time15_end), 	TIME_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time15_set), 	TIME_SET_PER_LEN);
 	
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time16_start), TIME_PER_LEN);
-			len += negative(buf+len, (rt_uint8_t *)&(p->item.time16_end), 	TIME_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time16_start), TIME_JUDGE_PER_LEN);
+			len += negative(buf+len, (rt_uint8_t *)&(p->item.time16_end), 	TIME_JUDGE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.time16_set), 	TIME_SET_PER_LEN);
 
+			// 关联
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.k1_relate), 	K_RELATE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.k2_relate), 	K_RELATE_PER_LEN);
 			len += negative(buf+len, (rt_uint8_t *)&(p->item.k3_relate), 	K_RELATE_PER_LEN);
@@ -431,6 +448,105 @@ void add_ssr_bcd(rt_uint8_t b1,rt_uint8_t b2,rt_uint8_t b3,rt_uint8_t b4, rt_uin
 	}	
 }
 FINSH_FUNCTION_EXPORT(add_ssr_bcd, e.g: add_ssr_bcd(121,0,6,0,34,0,0,0,0,0,52,48))
+
+
+void sensor_show(rt_uint8_t id, rt_uint8_t show)
+{
+	Position p = sensor;
+	rt_uint8_t i = 0;	
+
+	while(p != RT_NULL)
+	{
+		if((++i) == id)
+		{
+			p->item.is_show = show;
+			refresh_sensor_to_flash();
+			return;
+		}
+
+		p = p->next;
+	}
+}
+FINSH_FUNCTION_EXPORT(sensor_show, e.g: sensor_show(1,1))
+
+
+#define FRONT	0xFF00FF00
+#define LATER	0x00FF00FF
+void set_backup(Position p, rt_uint8_t ch, rt_uint8_t status)
+{
+	if(ch == 1)
+	{
+		if(status == 1)
+		{													 
+			p->item.s1c1_set_backup = p->item.sensor1_ch1_set & LATER;
+			p->item.sensor1_ch1_set = p->item.sensor1_ch1_set & FRONT;					
+		}
+		else if(status == 0)
+		{					
+			p->item.sensor1_ch1_set = p->item.s1c1_set_backup | p->item.sensor1_ch1_set;
+			p->item.s1c1_set_backup = p->item.sensor1_ch1_set & FRONT;
+		}	
+	}
+	else if(ch == 2)
+	{
+		if(status == 1)
+		{													 
+			p->item.s1c2_set_backup = p->item.sensor1_ch2_set & LATER;
+			p->item.sensor1_ch2_set = p->item.sensor1_ch2_set & FRONT;					
+		}
+		else if(status == 0)
+		{					
+			p->item.sensor1_ch2_set = p->item.s1c2_set_backup | p->item.sensor1_ch2_set;
+			p->item.s1c2_set_backup = p->item.sensor1_ch2_set & FRONT;
+		}
+	}
+	else if(ch == 3)
+	{
+		if(status == 1)
+		{													 
+			p->item.s2c1_set_backup = p->item.sensor2_ch1_set & LATER;
+			p->item.sensor2_ch1_set = p->item.sensor2_ch1_set & FRONT;					
+		}
+		else if(status == 0)
+		{					
+			p->item.sensor2_ch1_set = p->item.s2c1_set_backup | p->item.sensor2_ch1_set;
+			p->item.s2c1_set_backup = p->item.sensor2_ch1_set & FRONT;
+		}
+	}
+	else if(ch == 4)
+	{
+		if(status == 1)
+		{													 
+			p->item.s2c2_set_backup = p->item.sensor2_ch2_set & LATER;
+			p->item.sensor2_ch2_set = p->item.sensor2_ch2_set & FRONT;					
+		}
+		else if(status == 0)
+		{					
+			p->item.sensor2_ch2_set = p->item.s2c2_set_backup | p->item.sensor2_ch2_set;
+			p->item.s2c2_set_backup = p->item.sensor2_ch2_set & FRONT;
+		}
+	}
+	refresh_sensor_to_flash();
+}
+
+
+void sensor_set_backup(rt_uint8_t id, rt_uint8_t ch, rt_uint8_t status)
+{
+	Position p = sensor;
+	rt_uint8_t i = 0;	
+
+	while(p != RT_NULL)
+	{
+		if((++i) == id)
+		{
+			set_backup(p, ch, status);
+			return;
+		}
+
+		p = p->next;
+	}
+}
+FINSH_FUNCTION_EXPORT(sensor_set_backup, e.g: sensor_set_backup(1,1,1))
 
 
 void sensor_set(rt_uint8_t id, rt_uint8_t ch, rt_uint16_t min, rt_uint16_t max, rt_uint16_t mid, rt_uint8_t rep_id, rt_uint8_t rep_num, rt_uint16_t set)

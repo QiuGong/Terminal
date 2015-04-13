@@ -63,6 +63,7 @@ void warn_rep(Position p);
 /*****************warn_judge_value.c*******************/
 void warn_judge_value(Position p);
 rt_uint8_t _get_value_warn_flag(void);
+void _set_value_warn_flag(rt_uint8_t value);
 
 
 /*****************warn_judge_timer.c*******************/
@@ -76,6 +77,7 @@ void warn_relate(Position p);
 /*****************warn_time_out.c*******************/
 void warn_time_out(Position p);
 rt_uint8_t _get_timeout_warn_flag(void);
+void _set_timeout_warn_flag(rt_uint8_t value);
 
 
 /*****************warn_power_drop.c*******************/
@@ -90,7 +92,9 @@ rt_uint32_t _get_rs485_running(void);
 void warn_timer_start(void);
 SelectFun _get_fun_enable(void);
 rt_uint8_t get_value_warn_flag(void);
+void set_value_warn_flag(rt_uint8_t value);
 rt_uint8_t get_timeout_warn_flag(void);
+void set_timeout_warn_flag(rt_uint8_t value);
 
 
 #endif

@@ -6,16 +6,6 @@
 #include <stm32f10x.h>
 
 
-/*****************rs485.c*******************/
-/* EN485(PA0) */
-#define EN_RS485_RCC        	RCC_APB2Periph_GPIOA
-#define EN_RS485_GPIO       	GPIOA
-#define EN_RS485_PIN        	(GPIO_Pin_0)
-#define EN_RS485_DISABLE 		GPIO_SetBits(EN_RS485_GPIO, EN_RS485_PIN);
-#define EN_RS485_ENABLE 		GPIO_ResetBits(EN_RS485_GPIO, EN_RS485_PIN);
-
-
-
 /* 协议格式 */
 // 包头
 #define HEAD        			0xAA
@@ -42,25 +32,27 @@
 #define ALL_LEN     			19
 
 
+/* 是否显示长度	*/
+#define IS_SHOW_LEN				1
+
 
 /* 开关命令	*/
 #define TURN_CMD   				0x01
 enum X01_DEV{ LED = 0x01, CH1 = 0x02, T2 = 0x03, T3 = 0x04, M_A = 0x05, M_B = 0x06, M_C = 0x07};
 enum X01_CONTROL{ ON = 0x01, OFF = 0x00};
 
-// 判断组数,每组长度
-#define TIME_JUDGE_NUM			0x10 * 2
-#define TIME_PER_LEN			0x02
+// 判断 组数,对数,每组长度
+#define TIME_JUDGE_GROUPS_NUM	0x10
+#define TIME_JUDGE_PAIR_NUM		0x02
+#define TIME_JUDGE_PER_LEN		0x02
 
-// 定时控制值，定时控制值长度
-#define TIME_SET_VALUE_NUM		0x10
+// 判断 组数,每组长度
+#define TIME_SET_GROUPS_NUM		0x10
 #define TIME_SET_PER_LEN		0x04
-
 
 
 /* 通用应答	*/
 #define GENERAL_CMD 			0x10
-
 
 
 /* 传感器 */
@@ -70,14 +62,15 @@ enum X01_CONTROL{ ON = 0x01, OFF = 0x00};
 // 传感器二 查询 
 #define SENSOR_2    			0x03
 
-// 判断组数,每组长度
-#define SENSOR_JUDGE_NUM		0x04 * 4
-#define SENSOR_PER_LEN			0x02
+// 判断 组数,对数,每组长度
+#define SENSOR_JUDGE_GROUPS_NUM	0x04
+#define SENSOR_JUDGE_PAIR_NUM	0x04
+#define SENSOR_JUDGE_PER_LEN	0x02
 
-// 超值控制值，超值控制值长度
-#define SENSOR_SET_VALUE_NUM	0x04
+// 判断 组数,每组长度
+#define SENSOR_SET_GROUPS_NUM	0x04
+#define SENSOR_SET_PAIR_NUM		0x02
 #define SENSOR_SET_PER_LEN		0x04
-
 
 
 /* 高低电平 查询 */
@@ -88,24 +81,24 @@ enum X01_CONTROL{ ON = 0x01, OFF = 0x00};
 #define K4_SET      			0x08
 
 // 超值控制值，超值控制值长度
-#define K_RELATE_VALUE_NUM		0x04 
+#define K_RELATE_GROUPS_NUM		0x04 
 #define K_RELATE_PER_LEN		0x02 
-
 
 
 /* 传感器最大数 */
 #define MAX_SENSOR  			10
 
 
-
 /* 每组传感器长度 */
-#define PER_SENSOR_FLASH_LEN (ID_LEN + (SENSOR_PER_LEN * SENSOR_JUDGE_NUM + SENSOR_SET_VALUE_NUM * SENSOR_SET_PER_LEN) + (TIME_PER_LEN * TIME_JUDGE_NUM + TIME_SET_VALUE_NUM * TIME_SET_PER_LEN) + (K_RELATE_VALUE_NUM * K_RELATE_PER_LEN))
-
+#define PER_SENSOR_FLASH_LEN 	(ID_LEN + \
+							  	(IS_SHOW_LEN) + \
+							 	(SENSOR_JUDGE_GROUPS_NUM * SENSOR_JUDGE_PAIR_NUM * SENSOR_JUDGE_PER_LEN + SENSOR_SET_GROUPS_NUM * SENSOR_SET_PAIR_NUM * SENSOR_SET_PER_LEN) + \
+							 	(TIME_JUDGE_GROUPS_NUM * TIME_JUDGE_PAIR_NUM * TIME_JUDGE_PER_LEN + TIME_SET_GROUPS_NUM * TIME_SET_PER_LEN) + \
+							 	(K_RELATE_GROUPS_NUM * K_RELATE_PER_LEN)) 
 
 
 /* 接收邮箱，最大消息数	*/
 #define MAX_MQ  				3
-
 
 
 void _rs485_rec_thread_entry(void* parameter);
@@ -136,7 +129,12 @@ void rec_last_time(rt_uint8_t *b);
 // 6) list_sensor() 增加变量查看
 typedef struct ELEMENT
 {			
-	rt_uint8_t  id[ID_LEN]; /* ID */
+	/* ID */
+	rt_uint8_t  id[ID_LEN]; 
+
+
+	/* 显示屏显示 */
+	rt_uint8_t	is_show;
 
 
 	/*	
@@ -181,6 +179,7 @@ typedef struct ELEMENT
 	rt_uint16_t	sensor1_ch1_mid;// 中间值 	
 	rt_uint16_t sensor1_ch1_rep;// 更换设值
 	rt_uint32_t sensor1_ch1_set;// 设置
+	rt_uint32_t s1c1_set_backup;// 设置备份
 
 	rt_uint16_t	sensor1_ch2;// 溶氧度
 	rt_uint16_t	sensor1_ch2_cnt;
@@ -189,6 +188,7 @@ typedef struct ELEMENT
 	rt_uint16_t	sensor1_ch2_mid;		
 	rt_uint16_t sensor1_ch2_rep;
 	rt_uint32_t sensor1_ch2_set;
+	rt_uint32_t s1c2_set_backup;
 
 	rt_uint16_t	sensor2_ch1;// PH
 	rt_uint16_t	sensor2_ch1_cnt;
@@ -197,6 +197,7 @@ typedef struct ELEMENT
 	rt_uint16_t	sensor2_ch1_mid;		
 	rt_uint16_t sensor2_ch1_rep;
 	rt_uint32_t sensor2_ch1_set;
+	rt_uint32_t s2c1_set_backup;
 
 	rt_uint16_t	sensor2_ch2;// 温度
 	rt_uint16_t	sensor2_ch2_cnt;
@@ -205,6 +206,7 @@ typedef struct ELEMENT
 	rt_uint16_t	sensor2_ch2_mid;		
 	rt_uint16_t sensor2_ch2_rep;
 	rt_uint32_t	sensor2_ch2_set;
+	rt_uint32_t s2c2_set_backup;
 
 	
 	// 设置时间开始，结束，控制标志
@@ -313,6 +315,7 @@ unsigned char Length(List L);
 /*****************rsInterface.c*******************/
 List get_sensor_list(void);
 List _get_sensor_list(void);//(不能上移)
+void set_backup(Position p, rt_uint8_t ch, rt_uint8_t status);//(不能上移)
 void control_sensor(rt_uint8_t *id, enum X01_DEV dev, enum X01_CONTROL control);
 void rs485_rec_thread_entry(void* parameter);
 rt_uint32_t get_rs485_time(void);

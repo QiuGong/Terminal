@@ -417,12 +417,20 @@ static void warn_callBack(void *parameter)
 			{
 				warn_judge_value(p);
 			}
+			else
+			{
+				set_value_warn_flag(0);
+			}
 		#endif
 
 		#if ( WARN_TIME_OUT > 0 )
 			if(_get_fun_enable().warn_time_out == 1)
 			{
 				warn_time_out(p);
+			}
+			else
+			{
+				set_timeout_warn_flag(0);
 			}
 		#endif
 
