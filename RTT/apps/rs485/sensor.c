@@ -478,59 +478,83 @@ void set_backup(Position p, rt_uint8_t ch, rt_uint8_t status)
 	{
 		if(status == 1)
 		{													 
-			p->item.s1c1_set_backup = p->item.sensor1_ch1_set & LATER;
-			p->item.sensor1_ch1_set = p->item.sensor1_ch1_set & FRONT;					
+			if(p->item.s1c1_set_backup == 0)
+			{
+				p->item.s1c1_set_backup = p->item.sensor1_ch1_set & LATER;
+				p->item.sensor1_ch1_set = p->item.sensor1_ch1_set & FRONT;
+			}					
 		}
 		else if(status == 0)
 		{					
-			p->item.sensor1_ch1_set = p->item.s1c1_set_backup | p->item.sensor1_ch1_set;
-			p->item.s1c1_set_backup = p->item.sensor1_ch1_set & FRONT;
+			if(p->item.s1c1_set_backup != 0)
+			{
+				p->item.sensor1_ch1_set = p->item.s1c1_set_backup | p->item.sensor1_ch1_set;
+				p->item.s1c1_set_backup = p->item.s1c1_set_backup & FRONT;
+			}
 		}	
 	}
 	else if(ch == 2)
 	{
 		if(status == 1)
 		{													 
-			p->item.s1c2_set_backup = p->item.sensor1_ch2_set & LATER;
-			p->item.sensor1_ch2_set = p->item.sensor1_ch2_set & FRONT;					
+			if(p->item.s1c2_set_backup == 0)
+			{
+				p->item.s1c2_set_backup = p->item.sensor1_ch2_set & LATER;
+				p->item.sensor1_ch2_set = p->item.sensor1_ch2_set & FRONT;
+			}					
 		}
 		else if(status == 0)
 		{					
-			p->item.sensor1_ch2_set = p->item.s1c2_set_backup | p->item.sensor1_ch2_set;
-			p->item.s1c2_set_backup = p->item.sensor1_ch2_set & FRONT;
-		}
+			if(p->item.s1c2_set_backup != 0)
+			{
+				p->item.sensor1_ch2_set = p->item.s1c2_set_backup | p->item.sensor1_ch2_set;
+				p->item.s1c2_set_backup = p->item.s1c2_set_backup & FRONT;
+			}
+		}	
 	}
 	else if(ch == 3)
 	{
 		if(status == 1)
 		{													 
-			p->item.s2c1_set_backup = p->item.sensor2_ch1_set & LATER;
-			p->item.sensor2_ch1_set = p->item.sensor2_ch1_set & FRONT;					
+			if(p->item.s2c1_set_backup == 0)
+			{
+				p->item.s2c1_set_backup = p->item.sensor2_ch1_set & LATER;
+				p->item.sensor2_ch1_set = p->item.sensor2_ch1_set & FRONT;
+			}					
 		}
 		else if(status == 0)
 		{					
-			p->item.sensor2_ch1_set = p->item.s2c1_set_backup | p->item.sensor2_ch1_set;
-			p->item.s2c1_set_backup = p->item.sensor2_ch1_set & FRONT;
-		}
+			if(p->item.s2c1_set_backup != 0)
+			{
+				p->item.sensor2_ch1_set = p->item.s2c1_set_backup | p->item.sensor2_ch1_set;
+				p->item.s2c1_set_backup = p->item.s2c1_set_backup & FRONT;
+			}
+		}	
 	}
 	else if(ch == 4)
 	{
 		if(status == 1)
 		{													 
-			p->item.s2c2_set_backup = p->item.sensor2_ch2_set & LATER;
-			p->item.sensor2_ch2_set = p->item.sensor2_ch2_set & FRONT;					
+			if(p->item.s2c2_set_backup == 0)
+			{
+				p->item.s2c2_set_backup = p->item.sensor2_ch2_set & LATER;
+				p->item.sensor2_ch2_set = p->item.sensor2_ch2_set & FRONT;
+			}					
 		}
 		else if(status == 0)
 		{					
-			p->item.sensor2_ch2_set = p->item.s2c2_set_backup | p->item.sensor2_ch2_set;
-			p->item.s2c2_set_backup = p->item.sensor2_ch2_set & FRONT;
-		}
+			if(p->item.s2c2_set_backup != 0)
+			{
+				p->item.sensor2_ch2_set = p->item.s2c2_set_backup | p->item.sensor2_ch2_set;
+				p->item.s2c2_set_backup = p->item.s2c2_set_backup & FRONT;
+			}
+		}	
 	}
 	refresh_sensor_to_flash();
 }
 
 
-void sensor_set_backup(rt_uint8_t id, rt_uint8_t ch, rt_uint8_t status)
+void sensor_set_bkp(rt_uint8_t id, rt_uint8_t ch, rt_uint8_t status)
 {
 	Position p = sensor;
 	rt_uint8_t i = 0;	
@@ -546,7 +570,7 @@ void sensor_set_backup(rt_uint8_t id, rt_uint8_t ch, rt_uint8_t status)
 		p = p->next;
 	}
 }
-FINSH_FUNCTION_EXPORT(sensor_set_backup, e.g: sensor_set_backup(1,1,1))
+FINSH_FUNCTION_EXPORT(sensor_set_bkp, e.g: sensor_set_bkp(1,1,1))
 
 
 void sensor_set(rt_uint8_t id, rt_uint8_t ch, rt_uint16_t min, rt_uint16_t max, rt_uint16_t mid, rt_uint8_t rep_id, rt_uint8_t rep_num, rt_uint16_t set)
