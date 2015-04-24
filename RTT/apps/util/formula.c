@@ -14,25 +14,19 @@ rt_uint16_t formula_temp_8(rt_uint8_t source)
  
   
 /** 
- * 1	685	4.9
- * 2	681	5.2
- * 3	670	5.6
- * 4	625	7.0
- * 5	617	7.1
- * 6	610	7.4
  * (E1-E2)/(PH1-PH2)=K
 */
-static rt_uint16_t 	E1 = 618;
-static rt_uint16_t 	PH = 69;
-static rt_uint16_t	PH_K = 35200;
+static rt_uint16_t 		E1 = 410;
+static rt_uint16_t 		PH = 69;
+static rt_uint16_t		PH_K = 34267;
 rt_uint16_t formula_ph_16(rt_uint16_t source)
 {	
-	return (((E1 - source) / (PH_K/1000.0)) + (PH/10.0)) * 10;
+	return ((PH/10.0) - ((E1-source) / (PH_K/1000.0))) * 10;
 }
 
 rt_uint16_t formula_ph_8(rt_uint8_t source)
 {
-	return E1 + (PH_K/1000.0) * ((PH/10.0) - source);
+	return E1 - ((PH_K/1000.0) * ((PH/10.0) - source));
 }									  
 
 
@@ -91,13 +85,3 @@ void get_formula_do(void)
 FINSH_FUNCTION_EXPORT(get_formula_do, e.g: get_formula_do())
 #endif
 
-
-rt_uint8_t formula_relate_16(rt_uint16_t source)
-{
-	return (rt_uint8_t)source;
-}
-
-rt_uint16_t formula_relate_8(rt_uint8_t source)
-{
-	return (rt_uint16_t)source;
-}
