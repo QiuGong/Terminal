@@ -181,7 +181,7 @@ void _get_query_sensor_value(rt_uint8_t which)
 			x04_dsp_request (formula_temp_16(p->item.sensor2_ch2_min), 		formula_temp_16(p->item.sensor2_ch2_max), 
 					 		(formula_ph_16(p->item.sensor2_ch1_min)/10),	(formula_ph_16(p->item.sensor2_ch1_max)/10), 
 					 		(formula_do_16(p->item.sensor1_ch2_min)/10), 	(formula_do_16(p->item.sensor1_ch2_max)/10), 
-					 		p->item.s1c2_set_backup == 0 ? 0 : 1);		
+					 		p->item.s1c2_set_backup == 0 ? 1 : 0);		
 		}
 
 		p = p->next;

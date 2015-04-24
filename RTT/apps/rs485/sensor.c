@@ -476,7 +476,8 @@ void set_backup(Position p, rt_uint8_t ch, rt_uint8_t status)
 {
 	if(ch == 1)
 	{
-		if(status == 1)
+		// 备份
+		if(status == 0)
 		{													 
 			if(p->item.s1c1_set_backup == 0)
 			{
@@ -484,7 +485,8 @@ void set_backup(Position p, rt_uint8_t ch, rt_uint8_t status)
 				p->item.sensor1_ch1_set = p->item.sensor1_ch1_set & FRONT;
 			}					
 		}
-		else if(status == 0)
+		// 还原
+		else if(status == 1)
 		{					
 			if(p->item.s1c1_set_backup != 0)
 			{
@@ -495,7 +497,7 @@ void set_backup(Position p, rt_uint8_t ch, rt_uint8_t status)
 	}
 	else if(ch == 2)
 	{
-		if(status == 1)
+		if(status == 0)
 		{													 
 			if(p->item.s1c2_set_backup == 0)
 			{
@@ -503,7 +505,7 @@ void set_backup(Position p, rt_uint8_t ch, rt_uint8_t status)
 				p->item.sensor1_ch2_set = p->item.sensor1_ch2_set & FRONT;
 			}					
 		}
-		else if(status == 0)
+		else if(status == 1)
 		{					
 			if(p->item.s1c2_set_backup != 0)
 			{
@@ -514,7 +516,7 @@ void set_backup(Position p, rt_uint8_t ch, rt_uint8_t status)
 	}
 	else if(ch == 3)
 	{
-		if(status == 1)
+		if(status == 0)
 		{													 
 			if(p->item.s2c1_set_backup == 0)
 			{
@@ -522,7 +524,7 @@ void set_backup(Position p, rt_uint8_t ch, rt_uint8_t status)
 				p->item.sensor2_ch1_set = p->item.sensor2_ch1_set & FRONT;
 			}					
 		}
-		else if(status == 0)
+		else if(status == 1)
 		{					
 			if(p->item.s2c1_set_backup != 0)
 			{
@@ -533,7 +535,7 @@ void set_backup(Position p, rt_uint8_t ch, rt_uint8_t status)
 	}
 	else if(ch == 4)
 	{
-		if(status == 1)
+		if(status == 0)
 		{													 
 			if(p->item.s2c2_set_backup == 0)
 			{
@@ -541,7 +543,7 @@ void set_backup(Position p, rt_uint8_t ch, rt_uint8_t status)
 				p->item.sensor2_ch2_set = p->item.sensor2_ch2_set & FRONT;
 			}					
 		}
-		else if(status == 0)
+		else if(status == 1)
 		{					
 			if(p->item.s2c2_set_backup != 0)
 			{

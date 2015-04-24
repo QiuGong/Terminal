@@ -13,7 +13,7 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 void _flash_erase(rt_uint32_t START_ADDR, rt_uint32_t END_ADDR)  //擦
 {
   	rt_uint32_t EraseCounter = 0x00;   
-  	rt_uint32_t NbrOfPage 	= 0x00;				   //要擦除的页面数量
+  	rt_uint32_t NbrOfPage 	= 0x00;			   //要擦除的页面数量
   	FLASH_Status FLASHStatus = FLASH_COMPLETE; //FLASH工作状态
 
    	/* Unlock the Flash Bank1 Program Erase controller */

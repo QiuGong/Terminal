@@ -5,23 +5,26 @@
 #include "rtthread.h"
 #include "config.h"
 
-//#ifndef __IP_ADDR_H
-//struct ip_addr
-//{
-//    rt_uint32_t addr;
-//};
-//typedef struct ip_addr ip_addr_t;
 
-///** Set an IP address given by the four byte-parts.
-//    Little-endian version that prevents the use of htonl. */
-//#define IP4_ADDR(ipaddr, a,b,c,d) \
-//        (ipaddr)->addr = ((rt_uint32_t)((d) & 0xff) << 24) | \
-//                         ((rt_uint32_t)((c) & 0xff) << 16) | \
-//                         ((rt_uint32_t)((b) & 0xff) << 8)  | \
-//                          (rt_uint32_t)((a) & 0xff)
-//#endif
+#ifndef __IP_ADDR_H
+struct ip_addr
+{
+    rt_uint32_t addr;
+};
+typedef struct ip_addr ip_addr_t;
 
-//defineS
+
+/** Set an IP address given by the four byte-parts.
+    Little-endian version that prevents the use of htonl. */
+#define IP4_ADDR(ipaddr, a,b,c,d) \
+        (ipaddr)->addr = ((rt_uint32_t)((d) & 0xff) << 24) | \
+                         ((rt_uint32_t)((c) & 0xff) << 16) | \
+                         ((rt_uint32_t)((b) & 0xff) << 8)  | \
+                          (rt_uint32_t)((a) & 0xff)
+
+#endif
+
+
 //sim900 working status mode
 //non transparent uart process for <0x10
 //transparent uart process for >=0x10
@@ -126,5 +129,5 @@ rt_size_t rt_sim900_write(const void* buffer, rt_size_t size);
 rt_err_t rt_sim900_control(rt_uint8_t cmd, void *args);
 void rt_hw_sim900_init(const char* device_name);
 
-#endif
 
+#endif
