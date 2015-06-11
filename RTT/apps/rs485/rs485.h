@@ -168,7 +168,7 @@ typedef struct ELEMENT
 
 
 	// 最后接收时间	
-	rt_uint32_t	last_rec_time;	
+	rt_uint32_t	last_rec_time;
 
 
 	// 传感器值，最小，最大，控制标志

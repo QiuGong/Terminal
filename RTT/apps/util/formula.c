@@ -45,6 +45,18 @@ void get_formula_ph(void)
 	rt_kprintf("E1=%d, PH=%d, PH_K=%d\n", E1, PH, PH_K);
 }
 FINSH_FUNCTION_EXPORT(get_formula_ph, e.g: get_formula_ph())
+
+void ph_16(rt_uint16_t source)
+{
+	rt_kprintf("ph_16=\n", formula_ph_16(source));
+}
+FINSH_FUNCTION_EXPORT(ph_16, e.g: ph_16(410))
+
+void ph_8(rt_uint8_t source)
+{
+	rt_kprintf("ph_8=\n", formula_ph_8(source));
+}
+FINSH_FUNCTION_EXPORT(ph_8, e.g: ph_8(6))
 #endif
 
 

@@ -28,6 +28,9 @@
 #define S2_C1               0x03
 #define S2_C2               0x04
 
+// 报警延长时间
+#define	WARN_DELAY_TIME		0x03
+
 
 // 延迟报警
 #if ( WARN_EN > 0 )
@@ -42,6 +45,7 @@
 #if ( WARN_VALUE > 0 )
 
 static rt_uint8_t 	value_warn_flag;
+static rt_uint32_t 	value_warn_flag_last_rec_time;
 rt_uint8_t _get_value_warn_flag(void)
 {
 	return 	value_warn_flag;
@@ -65,6 +69,7 @@ void warn_judge_value(Position p)
 			{
 				#if ( WARN_EN > 0 )
 					value_warn_flag = S1_C1;
+					value_warn_flag_last_rec_time = p->item.last_rec_time;
 					warn_judge_set(p, p->item.sensor1_ch1_set, WHICH_WARN_VALUE);
 				#endif
 		
@@ -110,8 +115,12 @@ void warn_judge_value(Position p)
 
 		#if ( WARN_EN > 0 )
 			if(value_warn_flag == S1_C1)
-			{
-				value_warn_flag = NORMAL;
+			{				
+				if(p->item.last_rec_time - value_warn_flag_last_rec_time > WARN_DELAY_TIME)
+				{
+					value_warn_flag = NORMAL;
+					value_warn_flag_last_rec_time = p->item.last_rec_time;
+				}
 			}
 		#endif
 		
@@ -146,6 +155,7 @@ void warn_judge_value(Position p)
 			{		
 				#if ( WARN_EN > 0 )
 					value_warn_flag = S1_C2;
+					value_warn_flag_last_rec_time = p->item.last_rec_time;
 					warn_judge_set(p, p->item.sensor1_ch2_set, WHICH_WARN_VALUE);
 				#endif
 		
@@ -192,7 +202,11 @@ void warn_judge_value(Position p)
 		#if ( WARN_EN > 0 )
 			if(value_warn_flag == S1_C2)
 			{
-				value_warn_flag = NORMAL;
+				if(p->item.last_rec_time - value_warn_flag_last_rec_time > WARN_DELAY_TIME)
+				{
+					value_warn_flag = NORMAL;
+					value_warn_flag_last_rec_time = p->item.last_rec_time;
+				}
 			}
 		#endif
 		
@@ -227,6 +241,7 @@ void warn_judge_value(Position p)
 			{		
 				#if ( WARN_EN > 0 )
 					value_warn_flag = S2_C1;
+					value_warn_flag_last_rec_time = p->item.last_rec_time;
 					warn_judge_set(p, p->item.sensor2_ch1_set, WHICH_WARN_VALUE);
 				#endif
 		
@@ -273,7 +288,11 @@ void warn_judge_value(Position p)
 		#if ( WARN_EN > 0 )
 			if(value_warn_flag == S2_C1)
 			{
-				value_warn_flag = NORMAL;
+				if(p->item.last_rec_time - value_warn_flag_last_rec_time > WARN_DELAY_TIME)
+				{
+					value_warn_flag = NORMAL;
+					value_warn_flag_last_rec_time = p->item.last_rec_time;
+				}
 			}
 		#endif
 		
@@ -308,6 +327,7 @@ void warn_judge_value(Position p)
 			{		
 				#if ( WARN_EN > 0 )
 					value_warn_flag = S2_C2;
+					value_warn_flag_last_rec_time = p->item.last_rec_time;
 					warn_judge_set(p, p->item.sensor2_ch2_set, WHICH_WARN_VALUE);
 				#endif
 		
@@ -354,7 +374,11 @@ void warn_judge_value(Position p)
 		#if ( WARN_EN > 0 )
 			if(value_warn_flag == S2_C2)
 			{
-				value_warn_flag = NORMAL;
+				if(p->item.last_rec_time - value_warn_flag_last_rec_time > WARN_DELAY_TIME)
+				{
+					value_warn_flag = NORMAL;
+					value_warn_flag_last_rec_time = p->item.last_rec_time;
+				}
 			}
 		#endif
 		

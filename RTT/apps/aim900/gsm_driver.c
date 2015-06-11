@@ -31,6 +31,7 @@ void light_off(void)
 	GPIO_SetBits(LIGHT_GPIO, LIGHT_PIN);
 }
 
+
 void light_on(void)
 {
 	GPIO_ResetBits(LIGHT_GPIO, LIGHT_PIN);

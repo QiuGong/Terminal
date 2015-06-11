@@ -178,9 +178,13 @@ void _get_query_sensor_value(rt_uint8_t which)
 	{	
 		if((++i) == which)
 		{
-			x04_dsp_request (formula_temp_16(p->item.sensor2_ch2_min), 		formula_temp_16(p->item.sensor2_ch2_max), 
-					 		(formula_ph_16(p->item.sensor2_ch1_min)/10),	(formula_ph_16(p->item.sensor2_ch1_max)/10), 
-					 		(formula_do_16(p->item.sensor1_ch2_min)/10), 	(formula_do_16(p->item.sensor1_ch2_max)/10), 
+			x04_dsp_request (formula_temp_16(p->item.sensor2_ch2_min), 		formula_temp_16(p->item.sensor2_ch2_max),
+							// PH 
+					 		(formula_ph_16(p->item.sensor2_ch1_min)/10) + ((formula_ph_16(p->item.sensor2_ch1_min)%10) >= 5 ? 1:0),	
+							(formula_ph_16(p->item.sensor2_ch1_max)/10) + ((formula_ph_16(p->item.sensor2_ch1_min)%10) >= 5 ? 1:0),
+							// do 
+					 		(formula_do_16(p->item.sensor1_ch2_min)/10), 	(formula_do_16(p->item.sensor1_ch2_max)/10),
+							// backup 
 					 		p->item.s1c2_set_backup == 0 ? 1 : 0);		
 		}
 
@@ -464,4 +468,39 @@ void _set_time_value(rt_uint8_t *b)
 	x02_dsp_request(0, 0, 0, 0);
 #endif
 }
+
+
+#ifdef RT_USING_FINSH
+#include <finsh.h>
+static void dsp_warn(void)
+{
+	if(_get_warn_flag() == U_TIMEOUT)
+	{
+		rt_kprintf("TIMEOUT");	
+	}
+	// ÈÜÑõ
+	else if(_get_warn_flag() == U_DO)
+	{
+		rt_kprintf("DO");
+	}
+	// PH
+	else if(_get_warn_flag() == U_PH)
+	{
+		rt_kprintf("PH");
+	}
+	// ÎÂ¶È
+	else if(_get_warn_flag() == U_TEMP)
+	{
+		rt_kprintf("TEMP");
+	}
+	// Õý³£
+	else
+	{
+		rt_kprintf("NORMAL");
+	}
+}
+
+FINSH_FUNCTION_EXPORT(dsp_warn, e.g: dsp_warn())
+#endif
+
 #endif
