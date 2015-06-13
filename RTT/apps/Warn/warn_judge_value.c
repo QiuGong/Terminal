@@ -68,8 +68,11 @@ void warn_judge_value(Position p)
 			if(p->item.sensor1_ch1_cnt >=  MAX_CNT)
 			{
 				#if ( WARN_EN > 0 )
-					value_warn_flag = S1_C1;
-					value_warn_flag_last_rec_time = p->item.last_rec_time;
+					if(p->item.sensor1_ch1_set > 0)
+					{ 
+						value_warn_flag = S1_C1;
+						value_warn_flag_last_rec_time = p->item.last_rec_time;
+					}
 					warn_judge_set(p, p->item.sensor1_ch1_set, WHICH_WARN_VALUE);
 				#endif
 		
@@ -116,10 +119,13 @@ void warn_judge_value(Position p)
 		#if ( WARN_EN > 0 )
 			if(value_warn_flag == S1_C1)
 			{				
-				if(p->item.last_rec_time - value_warn_flag_last_rec_time > WARN_DELAY_TIME)
+				if(p->item.sensor1_ch1_set > 0)
 				{
-					value_warn_flag = NORMAL;
-					value_warn_flag_last_rec_time = p->item.last_rec_time;
+					if(p->item.last_rec_time - value_warn_flag_last_rec_time > WARN_DELAY_TIME)
+					{
+						value_warn_flag = NORMAL;
+						value_warn_flag_last_rec_time = p->item.last_rec_time;
+					}
 				}
 			}
 		#endif
@@ -154,8 +160,11 @@ void warn_judge_value(Position p)
 			if(p->item.sensor1_ch2_cnt >=  MAX_CNT)
 			{		
 				#if ( WARN_EN > 0 )
-					value_warn_flag = S1_C2;
-					value_warn_flag_last_rec_time = p->item.last_rec_time;
+					if(p->item.sensor1_ch2_set > 0)
+					{ 
+						value_warn_flag = S1_C2;
+						value_warn_flag_last_rec_time = p->item.last_rec_time;
+					}
 					warn_judge_set(p, p->item.sensor1_ch2_set, WHICH_WARN_VALUE);
 				#endif
 		
@@ -202,10 +211,13 @@ void warn_judge_value(Position p)
 		#if ( WARN_EN > 0 )
 			if(value_warn_flag == S1_C2)
 			{
-				if(p->item.last_rec_time - value_warn_flag_last_rec_time > WARN_DELAY_TIME)
+				if(p->item.sensor1_ch2_set > 0)
 				{
-					value_warn_flag = NORMAL;
-					value_warn_flag_last_rec_time = p->item.last_rec_time;
+					if(p->item.last_rec_time - value_warn_flag_last_rec_time > WARN_DELAY_TIME)
+					{
+						value_warn_flag = NORMAL;
+						value_warn_flag_last_rec_time = p->item.last_rec_time;
+					}
 				}
 			}
 		#endif
@@ -240,8 +252,11 @@ void warn_judge_value(Position p)
 			if(p->item.sensor2_ch1_cnt >=  MAX_CNT)
 			{		
 				#if ( WARN_EN > 0 )
-					value_warn_flag = S2_C1;
-					value_warn_flag_last_rec_time = p->item.last_rec_time;
+					if(p->item.sensor2_ch1_set > 0)
+					{
+						value_warn_flag = S2_C1;
+						value_warn_flag_last_rec_time = p->item.last_rec_time;
+					}
 					warn_judge_set(p, p->item.sensor2_ch1_set, WHICH_WARN_VALUE);
 				#endif
 		
@@ -288,10 +303,13 @@ void warn_judge_value(Position p)
 		#if ( WARN_EN > 0 )
 			if(value_warn_flag == S2_C1)
 			{
-				if(p->item.last_rec_time - value_warn_flag_last_rec_time > WARN_DELAY_TIME)
+				if(p->item.sensor2_ch1_set > 0)
 				{
-					value_warn_flag = NORMAL;
-					value_warn_flag_last_rec_time = p->item.last_rec_time;
+					if(p->item.last_rec_time - value_warn_flag_last_rec_time > WARN_DELAY_TIME)
+					{
+						value_warn_flag = NORMAL;
+						value_warn_flag_last_rec_time = p->item.last_rec_time;
+					}
 				}
 			}
 		#endif
@@ -326,8 +344,11 @@ void warn_judge_value(Position p)
 			if(p->item.sensor2_ch2_cnt >=  MAX_CNT)
 			{		
 				#if ( WARN_EN > 0 )
-					value_warn_flag = S2_C2;
-					value_warn_flag_last_rec_time = p->item.last_rec_time;
+					if(p->item.sensor2_ch2_set > 0)
+					{
+						value_warn_flag = S2_C2;
+						value_warn_flag_last_rec_time = p->item.last_rec_time;
+					}
 					warn_judge_set(p, p->item.sensor2_ch2_set, WHICH_WARN_VALUE);
 				#endif
 		
@@ -374,10 +395,13 @@ void warn_judge_value(Position p)
 		#if ( WARN_EN > 0 )
 			if(value_warn_flag == S2_C2)
 			{
-				if(p->item.last_rec_time - value_warn_flag_last_rec_time > WARN_DELAY_TIME)
+				if(p->item.sensor2_ch2_set > 0)
 				{
-					value_warn_flag = NORMAL;
-					value_warn_flag_last_rec_time = p->item.last_rec_time;
+					if(p->item.last_rec_time - value_warn_flag_last_rec_time > WARN_DELAY_TIME)
+					{
+						value_warn_flag = NORMAL;
+						value_warn_flag_last_rec_time = p->item.last_rec_time;
+					}
 				}
 			}
 		#endif
